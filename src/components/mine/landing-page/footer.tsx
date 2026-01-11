@@ -1,146 +1,137 @@
-
-"use client"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-
-import {
-  FileText,
-  Github,
-  Instagram,
-  LinkedinIcon,
-  Twitter,
-} from "lucide-react";
+"use client";
 import Link from "next/link";
-import { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { Github, Twitter } from "lucide-react";
 
 const Footer = () => {
-
-  const icons = [
-    {
-      icon: Instagram,
-      link: "https://www.instagram.com/epitome0.0/",
-    }
-  ]
-
-  const firstLI = [
-    {
-      li: '01 Components',
-      href: '/docs/components-overview'
-    },
-    {
-      li: '02 Templates',
-      href: '/templates'
-    },
-  ]
-
-  const secondLI = [
-    {
-      li: '03 Playground',
-      href: '/playground'
-    },
-  ]
   return (
+    <footer className="w-full py-12 px-6 md:px-12 lg:px-24 bg-[#f5f5f5] dark:bg-neutral-950">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-12 md:gap-8">
+          {/* Left Column - Logo and Description */}
+          <div className="flex flex-col gap-6">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2">
+              <img
+                src="/logo/bg-less.png"
+                alt="ObsidianUI"
+                className="h-8 w-8 object-contain"
+              />
+              <span className="text-xl font-bold text-neutral-900 dark:text-white">
+                ObsidianUI
+              </span>
+            </Link>
 
+            {/* Description */}
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-sm">
+              ObsidianUI empowers developers to build premium,
+              motion-rich interfaces with ease. Transform your raw
+              ideas into compelling visuals.
+            </p>
 
-
-    <div className=" md:flex justify-center  ">
-      <section className="min-h-svh md:min-h-0 md:w-7xl mx-4 grid grid-cols-1 md:grid-cols-[1fr_2fr] grid-rows-[1fr_1fr_1fr_1fr] h-80">
-
-
-        <div className=" md:border-b md:border-r md:border-foreground/10  py-4 ">
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl font-light text-balance">
-            A carefully crafted React component library for building modern, responsive web applications.
-            <br /> Every component is designed with attention to detail.
-          </p>
-
-          {/* {
-            icons.map((el , id)=>{
-              return <div className="" key={id} >
-               <span>{el.icon}</span>
-              </div>
-            })
-          } */}
-
-
-        </div>
-
-        <div className=" p-4 md:border-b md:border-foreground/10 ">
-
-          <div className="grid grid-cols-[2fr_2fr_1fr] md:grid-cols-[1fr_1fr_2fr] w-fit  gap-4 font-medium text-foreground/70 ">
-
-            <ul>
-
-              {
-                firstLI.map((el, id) => {
-                  return <Link key={id} href={el.href}>
-                    <li className="hover:text-foreground"> {el.li}</li>
-                  </Link>
-                })
-              }
-            </ul>
-            <ul>
-              {
-                secondLI.map((el, id) => {
-                  return <Link key={id} href={el.href}>
-                    <li className="hover:text-foreground">{el.li}</li>
-                  </Link>
-                })
-              }
-
-            </ul>
-
-            <div className="py-2 flex gap-4 ">
-              <Link href='https://github.com/Atharvsinh-codez/ObsidianUI'>
-                < Github className="hover:text-foreground" />
+            {/* Social Icons */}
+            <div className="flex items-center gap-4 mt-2">
+              <Link
+                href="https://x.com/athrix_codes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200"
+              >
+                <Twitter className="w-4 h-4" />
               </Link>
-
+              <Link
+                href="https://github.com/Atharvsinh-codez"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200"
+              >
+                <Github className="w-4 h-4" />
+              </Link>
             </div>
+          </div>
+
+          {/* Middle Column - Product */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-sm font-semibold text-neutral-900 dark:text-white uppercase tracking-wider">
+              Product
+            </h3>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <Link
+                  href="/components"
+                  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
+                >
+                  Components
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/templates"
+                  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
+                >
+                  Templates
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Right Column - Resources */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-sm font-semibold text-neutral-900 dark:text-white uppercase tracking-wider">
+              Resources
+            </h3>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <Link
+                  href="/docs/installation"
+                  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
+                >
+                  Documentation
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://github.com/Atharvsinh-codez/ObsidianUI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
+                >
+                  GitHub
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://x.com/athrix_codes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
+                >
+                  Support
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="perspective-distant transform-3d md:border-r md:border-foreground/10  flex items-center justify-center ">
-          <motion.img
-
-            src="/logo/bg-less.png"
-            alt="Logo"
-            className="size-30 md:size-60 w-auto object-contain"
-            draggable={false}
-
-            whileHover={{
-              scale: 1.1
-            }}
-
-            transition={{
-              duration: 0.3
-            }}
-
-          />
-
-        </div>
-
-        <div className="flex text-[3rem] md:text-[6rem] items-center md:justify-center bg-[ #e91e63] overflow-hidden md:relative">
-          <h1 className="vengeanceUI-text">
-            ObsidianUI
-          </h1>
-        </div>
-
-        {/* Made by Athrix.me */}
-        <div className="col-span-1 md:col-span-2 py-6 border-t border-foreground/10 flex items-center justify-center">
-          <p className="text-sm text-muted-foreground flex items-center gap-1">
-            Made by <a href="https://athrix.me" target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground hover:underline">Athrix.me</a> <span className="text-red-500">❤️</span>
+        {/* Bottom Section */}
+        <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-neutral-500 dark:text-neutral-500">
+            © {new Date().getFullYear()} ObsidianUI. All rights reserved.
+          </p>
+          <p className="text-sm text-neutral-500 dark:text-neutral-500 flex items-center gap-1">
+            Made with <span className="text-red-500">❤️</span> by{" "}
+            <a
+              href="https://athrix.me"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-neutral-700 dark:text-neutral-300 hover:underline"
+            >
+              Athrix.me
+            </a>
           </p>
         </div>
-      </section>
-    </div>
-
+      </div>
+    </footer>
   );
 };
 
 export default Footer;
-

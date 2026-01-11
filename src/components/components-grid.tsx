@@ -30,19 +30,66 @@ import InteractiveBook from '@/components/ui/interactive-book'
 import { GlassDock } from '@/components/ui/glass-dock'
 import { Home, Bookmark, Mail, Github } from 'lucide-react'
 
-// Video preview component
-const VideoPreview = ({ src, poster }: { src: string; poster?: string }) => (
-    <video
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        poster={poster}
-    >
-        <source src={src} type="video/mp4" />
-    </video>
-)
+// Lazy Video preview component with Intersection Observer
+const VideoPreview = ({ src, poster }: { src: string; poster?: string }) => {
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const [isInView, setIsInView] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(() => {
+        const video = videoRef.current
+        if (!video) return
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsInView(true)
+                        if (video.paused) {
+                            video.play().catch(() => {
+                                // Ignore autoplay errors
+                            })
+                        }
+                    } else {
+                        if (!video.paused) {
+                            video.pause()
+                        }
+                    }
+                })
+            },
+            { threshold: 0.1, rootMargin: '50px' }
+        )
+
+        observer.observe(video)
+
+        return () => {
+            observer.disconnect()
+        }
+    }, [])
+
+    return (
+        <>
+            {/* Loading skeleton */}
+            {!isLoaded && (
+                <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+            )}
+            
+            <video
+                ref={videoRef}
+                className="absolute inset-0 w-full h-full object-cover"
+                loop
+                muted
+                playsInline
+                poster={poster}
+                preload="metadata"
+                onLoadedData={() => setIsLoaded(true)}
+                style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.3s' }}
+            >
+                {isInView && <source src={src} type="video/mp4" />}
+            </video>
+        </>
+    )
+}
 
 // Sample data for page 3 components
 const sampleIcons = [
