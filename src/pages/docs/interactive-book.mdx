@@ -1,0 +1,89 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import InteractiveBook from '@/components/ui/interactive-book'
+
+export const demoPages = [
+  {
+    pageNumber: 1,
+    title: "Chapter One",
+    content: <p>Once upon a time, in a land of beautiful UI components, there lived a developer who dreamed of creating the perfect interactive experience...</p>,
+    backContent: <p>The journey was long, but the destination was worth every line of code written with passion and purpose.</p>
+  },
+  {
+    pageNumber: 2,
+    title: "Chapter Two",
+    content: <p>The developer discovered the power of Framer Motion, and with it, brought life to static interfaces. Buttons danced, cards floated, and users smiled.</p>,
+    backContent: <p>Animation was not just decoration—it was communication, guiding users through experiences with grace and clarity.</p>
+  },
+  {
+    pageNumber: 3,
+    title: "The End",
+    content: <p>And so, with glassmorphism effects and smooth transitions, the developer created components that stood the test of time. The end... or just the beginning?</p>,
+    backContent: <p>Thank you for reading. May your code be clean and your animations smooth.</p>
+  },
+]
+
+# Interactive Book
+
+An interactive 3D book with realistic page-turning animations and hover effects.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[600px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 flex items-center justify-center">
+      <InteractiveBook 
+        coverImage="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop" 
+        bookTitle="The Art of UI"
+        bookAuthor="ObsidianUI"
+        pages={demoPages}
+        width={280}
+        height={400}
+      />
+    </div>
+  }
+  code={`import InteractiveBook from '@/components/ui/interactive-book'
+
+const pages = [
+  { pageNumber: 1, title: "Chapter One", content: <p>Content here...</p> },
+  { pageNumber: 2, title: "Chapter Two", content: <p>More content...</p> },
+]
+
+export function Demo() {
+  return (
+    <InteractiveBook 
+      coverImage="/book-cover.jpg"
+      bookTitle="My Book"
+      bookAuthor="Author Name"
+      pages={pages}
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="interactive-book" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/interactive-book.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "coverImage", type: "string", defaultValue: "Required", description: "URL for the book cover image" },
+    { prop: "bookTitle", type: "string", defaultValue: "'Book Title'", description: "Title displayed on cover" },
+    { prop: "bookAuthor", type: "string", defaultValue: "'Author Name'", description: "Author name on cover" },
+    { prop: "pages", type: "BookPage[]", defaultValue: "Required", description: "Array of page objects" },
+    { prop: "width", type: "number | string", defaultValue: "350", description: "Book width in pixels" },
+    { prop: "height", type: "number | string", defaultValue: "500", description: "Book height in pixels" }
+  ]}
+/>

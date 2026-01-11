@@ -1,0 +1,164 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { Github, Slack, Twitter } from 'lucide-react'
+
+# Staggered Grid
+
+A stunning scroll-animated grid layout with staggered column animations, expandable bento cards, and GSAP-powered scroll triggers. Creates a premium, magazine-style layout experience.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[400px] rounded-lg overflow-hidden bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-950 flex flex-col items-center justify-center p-8">
+      {/* Center Title */}
+      <h2 className="text-6xl md:text-7xl font-bold tracking-tight text-neutral-800 dark:text-white mb-8 uppercase">HALCYON</h2>
+      
+      {/* Grid Preview */}
+      <div className="w-full max-w-lg grid grid-cols-7 gap-2">
+        {Array.from({ length: 21 }).map((_, i) => {
+          const isMiddle = i >= 9 && i <= 11;
+          return (
+            <div 
+              key={i} 
+              className={`aspect-square rounded-lg transition-all duration-300 ${
+                isMiddle 
+                  ? 'bg-gradient-to-br from-blue-500 to-purple-600 col-span-1' 
+                  : 'bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600'
+              }`}
+              style={{ 
+                opacity: 0.4 + (Math.abs(3 - (i % 7)) * 0.15),
+                transform: `translateY(${Math.abs(3 - (i % 7)) * 2}px)`
+              }}
+            />
+          );
+        })}
+      </div>
+      
+      {/* Feature badges */}
+      <div className="flex gap-3 mt-8">
+        <span className="px-3 py-1 text-xs font-medium bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full">GSAP Animations</span>
+        <span className="px-3 py-1 text-xs font-medium bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full">Scroll Triggered</span>
+        <span className="px-3 py-1 text-xs font-medium bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full">Bento Cards</span>
+      </div>
+    </div>
+  }
+  code={`import { StaggeredGrid, BentoItem } from "@/components/ui/staggered-grid"
+import { SmoothScroll } from "@/components/ui/smooth-scroll"
+import { Github, Slack, Twitter } from "lucide-react"
+
+const images = Array.from({ length: 10 }, (_, i) => \`/img/\${i + 1}.jpg\`)
+
+const bentoItems: BentoItem[] = [
+  { id: 1, title: "Repository", subtitle: "Code", description: "Manage code", icon: <Github className="w-4 h-4" />, image: "/img/1.jpg" },
+  { id: 2, title: "Connect", subtitle: "Chat", description: "Collaborate", icon: <Slack className="w-4 h-4" />, image: "/img/2.jpg" },
+  { id: 3, title: "Share", subtitle: "Social", description: "Share updates", icon: <Twitter className="w-4 h-4" />, image: "/img/3.jpg" },
+]
+
+export default function Page() {
+  return (
+    <SmoothScroll>
+      <StaggeredGrid 
+        images={images} 
+        bentoItems={bentoItems} 
+        centerText="HALCYON"
+      />
+    </SmoothScroll>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="staggered-grid" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install gsap lenis clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the SmoothScroll component">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/smooth-scroll.tsx</code></p>
+</Dependencies>
+
+<Dependencies step={3} title="Copy the StaggeredGrid component">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/staggered-grid.tsx</code></p>
+</Dependencies>
+
+> **Note**: This component uses GSAP ScrollTrigger for scroll-based animations. Best viewed in a full-page layout with smooth scrolling enabled.
+
+## Usage
+
+```tsx
+import { StaggeredGrid, BentoItem } from "@/components/ui/staggered-grid"
+import { SmoothScroll } from "@/components/ui/smooth-scroll"
+import { Github, Slack, Twitter } from "lucide-react"
+
+export default function Page() {
+  const images = Array.from({ length: 20 }, (_, i) => `/img/${i + 1}.jpg`)
+
+  const bentoItems: BentoItem[] = [
+    {
+      id: 1,
+      title: "Repository",
+      subtitle: "Version Control",
+      description: "Secure, scalable code management.",
+      icon: <Github className="w-4 h-4" />,
+      image: "/img/1.jpg"
+    },
+    // ... more items
+  ]
+
+  return (
+    <SmoothScroll>
+      <main className="min-h-screen bg-black">
+        <StaggeredGrid
+          images={images}
+          bentoItems={bentoItems}
+          centerText="HALCYON"
+        />
+      </main>
+    </SmoothScroll>
+  )
+}
+```
+
+## Props
+
+### StaggeredGridProps
+
+<PropsTable
+  data={[
+    { prop: "images", type: "string[]", defaultValue: "-", description: "Array of image URLs to display in the grid cells" },
+    { prop: "bentoItems", type: "BentoItem[]", defaultValue: "-", description: "Array of bento items for the expandable cards section" },
+    { prop: "centerText", type: "string", defaultValue: '"Halcyon"', description: "Large centered text displayed above the grid with character animation" },
+    { prop: "credits", type: "object", defaultValue: "-", description: "Footer credits configuration with 'madeBy' and 'moreDemos' links" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container" },
+    { prop: "showFooter", type: "boolean", defaultValue: "true", description: "Whether to show the footer credits section" },
+  ]}
+/>
+
+### BentoItem
+
+<PropsTable
+  data={[
+    { prop: "id", type: "number | string", defaultValue: "-", description: "Unique identifier for the bento item" },
+    { prop: "title", type: "string", defaultValue: "-", description: "Title displayed in the card footer" },
+    { prop: "subtitle", type: "string", defaultValue: "-", description: "Subtitle for the bento item" },
+    { prop: "description", type: "string", defaultValue: "-", description: "Description text for the bento item" },
+    { prop: "icon", type: "React.ReactNode", defaultValue: "-", description: "Icon component displayed in the card" },
+    { prop: "image", type: "string", defaultValue: "-", description: "Background image URL for the expanded card" },
+  ]}
+/>
+
+## Features
+
+- **Staggered Column Animation**: Grid items animate in with staggered delays based on their column position, creating a wave-like effect from the center outward
+- **Expandable Bento Cards**: Interactive cards that expand on hover to reveal full-width images with smooth transitions
+- **Scroll-Triggered Animations**: All animations are tied to scroll position using GSAP ScrollTrigger for a smooth experience
+- **Text Character Animation**: The centered text animates character-by-character as you scroll
+- **Grid Icons with Hover Reveal**: Each grid cell shows icons with text reveal on hover
+- **Dark Mode Optimized**: Designed with a dark theme using zinc color palette
+- **Smooth Scrolling**: Uses Lenis for buttery-smooth scroll experience
+- **GPU Acceleration**: Uses will-change and force3D for hardware-accelerated animations

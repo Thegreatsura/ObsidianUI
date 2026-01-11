@@ -1,0 +1,49 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import AnimatedTabBar from '@/components/ui/animated-tab-bar'
+
+# Animated Tab Bar
+
+A beautiful iOS-style tab bar with smooth animations and morphing active indicator. Features multiple animation styles and full customization.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[200px] rounded-lg overflow-hidden bg-zinc-950 flex items-end justify-center pb-6">
+      <AnimatedTabBar />
+    </div>
+  }
+  code={`import AnimatedTabBar from '@/components/ui/animated-tab-bar'
+
+export function Demo() {
+  return <AnimatedTabBar />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="animated-tab-bar" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/animated-tab-bar.tsx</code></p>
+</Dependencies>
+
+> **Note**: This is a large component (400+ lines). Install via CLI for the full source code.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "TabItem[]", defaultValue: "[...defaults]", description: "Array of tab items with icon and label" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+    { prop: "defaultActiveIndex", type: "number", defaultValue: "0", description: "Initially active tab" },
+    { prop: "onTabChange", type: "(index) => void", defaultValue: "-", description: "Tab change callback" },
+  ]}
+/>

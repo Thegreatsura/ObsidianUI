@@ -1,0 +1,51 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import FlipFadeText from '@/components/ui/flip-fade-text'
+
+# Flip Fade Text
+
+An animated text component that flips and fades characters on a loop, creating a continuous mesmerizing effect.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-white dark:bg-zinc-900 flex items-center justify-center">
+      <FlipFadeText className="text-4xl font-bold text-neutral-900 dark:text-white">ObsidianUI</FlipFadeText>
+    </div>
+  }
+  code={`import FlipFadeText from '@/components/ui/flip-fade-text'
+
+export function Demo() {
+  return (
+    <FlipFadeText className="text-4xl font-bold">
+      Animation
+    </FlipFadeText>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="flip-fade-text" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/flip-fade-text.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full source code with animation timing logic.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "string", defaultValue: "-", description: "Text content to display" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>

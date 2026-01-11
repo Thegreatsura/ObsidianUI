@@ -1,0 +1,48 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import CreepyButton from '@/components/ui/creepy-button'
+
+# Creepy Button
+
+A unique button with a "creepy" morphing animation effect that distorts on hover. Creates an unsettling, attention-grabbing effect.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-zinc-950 flex items-center justify-center">
+      <CreepyButton>Hover Me</CreepyButton>
+    </div>
+  }
+  code={`import CreepyButton from '@/components/ui/creepy-button'
+
+export function Demo() {
+  return <CreepyButton>Click Me</CreepyButton>
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="creepy-button" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/creepy-button.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full source code with SVG filter animation logic.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "Button content" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+    { prop: "onClick", type: "() => void", defaultValue: "-", description: "Click handler" },
+  ]}
+/>

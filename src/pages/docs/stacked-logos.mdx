@@ -1,0 +1,70 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import StackedLogos from '@/components/ui/stacked-logos'
+
+export const demoLogoGroups = [
+  [
+    <img key="1" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />,
+    <img key="2" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue" />,
+    <img key="3" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" alt="Svelte" />,
+  ],
+  [
+    <img key="1" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" />,
+    <img key="2" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg" alt="Nuxt" />,
+    <img key="3" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gatsby/gatsby-original.svg" alt="Gatsby" />,
+  ],
+  [
+    <img key="1" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />,
+    <img key="2" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />,
+    <img key="3" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />,
+  ],
+]
+
+# Stacked Logos
+
+Multiple logo sets that animate in/out while stacked on top of each other with a mouse glow effect.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 flex items-center justify-center">
+      <StackedLogos logoGroups={demoLogoGroups} duration={10} />
+    </div>
+  }
+  code={`import StackedLogos from '@/components/ui/stacked-logos'
+
+const logoGroups = [
+  [<img src="/logo1.svg" />, <img src="/logo2.svg" />],
+  [<img src="/logo3.svg" />, <img src="/logo4.svg" />],
+]
+
+export function Demo() {
+  return <StackedLogos logoGroups={logoGroups} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="stacked-logos" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/stacked-logos.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "logoGroups", type: "React.ReactNode[][]", defaultValue: "Required", description: "Array of logo groups" },
+    { prop: "duration", type: "number", defaultValue: "30", description: "Animation duration in seconds" },
+    { prop: "stagger", type: "number", defaultValue: "0", description: "Stagger factor for timing" },
+    { prop: "logoWidth", type: "string", defaultValue: "'200px'", description: "Width of each logo container" }
+  ]}
+/>

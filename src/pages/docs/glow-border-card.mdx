@@ -1,0 +1,60 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import GlowBorderCard from '@/components/ui/glow-border-card'
+
+# Glow Border Card
+
+A card component with a beautiful animated glow effect around its border. The glow follows your mouse movement creating an interactive, premium feel.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-neutral-100 dark:bg-zinc-950 flex items-center justify-center p-8">
+      <GlowBorderCard className="bg-white dark:bg-zinc-900">
+        <div className="p-8 text-center">
+          <h3 className="text-xl font-bold mb-2 text-neutral-900 dark:text-white">Premium Card</h3>
+          <p className="text-neutral-500 dark:text-neutral-400">Hover to see the glow effect</p>
+        </div>
+      </GlowBorderCard>
+    </div>
+  }
+  code={`import GlowBorderCard from '@/components/ui/glow-border-card'
+
+export function Demo() {
+  return (
+    <GlowBorderCard>
+      <div className="p-8">
+        <h3 className="text-xl font-bold">Card Title</h3>
+        <p>Your content here</p>
+      </div>
+    </GlowBorderCard>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="glow-border-card" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/glow-border-card.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full source code. The component uses mouse tracking for the glow position.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "Card content" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+    { prop: "glowColor", type: "string", defaultValue: "'rgba(255,255,255,0.3)'", description: "Color of the glow effect" },
+  ]}
+/>

@@ -1,0 +1,129 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import SineWave from '@/components/ui/sine-wave'
+
+# Sine Wave
+
+An animated display of items arranged in a sine wave pattern. Each item bounces into position with a spring animation, creating a playful wave effect.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[400px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 flex items-center justify-center">
+      <SineWave 
+        items={[
+          { image: 'https://i.pravatar.cc/100?img=1' },
+          { image: 'https://i.pravatar.cc/100?img=2' },
+          { image: 'https://i.pravatar.cc/100?img=3' },
+          { image: 'https://i.pravatar.cc/100?img=4' },
+          { image: 'https://i.pravatar.cc/100?img=5' },
+          { image: 'https://i.pravatar.cc/100?img=6' },
+          { image: 'https://i.pravatar.cc/100?img=7' },
+        ]}
+        amplitude={60}
+        frequency={4}
+      />
+    </div>
+  }
+  code={`import SineWave from '@/components/ui/sine-wave'
+
+export function Demo() {
+  const items = [
+    { image: 'https://i.pravatar.cc/100?img=1' },
+    { image: 'https://i.pravatar.cc/100?img=2' },
+    { image: 'https://i.pravatar.cc/100?img=3' },
+    { image: 'https://i.pravatar.cc/100?img=4' },
+    { image: 'https://i.pravatar.cc/100?img=5' },
+  ]
+
+  return <SineWave items={items} amplitude={100} frequency={5} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="sine-wave" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/sine-wave.tsx</code></p>
+</Dependencies>
+
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { cn } from '@/lib/utils';
+
+const SineWave = ({
+  items,
+  amplitude = 100,
+  frequency = 5,
+  shouldAnimate = true,
+  itemClassName = ''
+}: {
+  items: { image: string }[];
+  amplitude?: number;
+  frequency?: number;
+  shouldAnimate?: boolean;
+  itemClassName?: string;
+}) => {
+  return (
+    <div className="w-full h-96 flex items-center justify-center overflow-hidden">
+      <div className="flex items-center justify-center gap-4 relative">
+        {items.map((item, index) => {
+          const yd = Math.sin((index * Math.PI) / frequency) * amplitude;
+
+          return (
+            <motion.div
+              key={`sine-wave-${index}`}
+              className="relative"
+              initial={{
+                opacity: shouldAnimate ? 0 : 1,
+                y: shouldAnimate ? 0 : yd
+              }}
+              animate={{ opacity: 1, y: yd }}
+              transition={{
+                duration: 0.8,
+                type: 'spring',
+                bounce: 0.5,
+                delay: index * 0.05
+              }}
+            >
+              <div className={cn(`w-20 h-20 rounded-xl overflow-hidden`, itemClassName)}>
+                <Image
+                  src={item.image}
+                  alt={`Item ${index + 1}`}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default SineWave;
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "{ image: string }[]", defaultValue: "-", description: "Array of items with image URLs" },
+    { prop: "amplitude", type: "number", defaultValue: "100", description: "Height of the wave peaks" },
+    { prop: "frequency", type: "number", defaultValue: "5", description: "Frequency of the sine wave" },
+    { prop: "shouldAnimate", type: "boolean", defaultValue: "true", description: "Enable entrance animation" },
+    { prop: "itemClassName", type: "string", defaultValue: "''", description: "Additional classes for items" },
+  ]}
+/>

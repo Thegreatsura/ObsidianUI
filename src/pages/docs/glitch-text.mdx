@@ -1,0 +1,118 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import GlitchText from '@/components/ui/glitch-text'
+
+# Glitch Text
+
+Text with a cyberpunk-style glitch animation effect. Features RGB color separation, blur effects, and jittery movement that creates an authentic digital distortion look.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-black flex items-center justify-center gap-8">
+      <GlitchText className="text-5xl font-bold text-white">GLITCH</GlitchText>
+    </div>
+  }
+  code={`import GlitchText from '@/components/ui/glitch-text'
+
+export function Demo() {
+  return (
+    <GlitchText className="text-5xl font-bold text-white">
+      GLITCH
+    </GlitchText>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="glitch-text" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/glitch-text.tsx</code></p>
+</Dependencies>
+
+```tsx
+"use client";
+
+import React from 'react';
+import { motion } from 'framer-motion';
+
+interface GlitchTextProps {
+    children: React.ReactNode;
+    className?: string;
+}
+
+export function GlitchText({ children, className }: GlitchTextProps) {
+    return (
+        <motion.span
+            animate={{
+                x: [0, 0, 0, 2, 0, 2, 2],
+                y: [2, -2, -2, 0, 0, 2, 0],
+                filter: [
+                    'blur(0px)',
+                    'blur(0px)',
+                    'blur(0px)',
+                    'blur(2px)',
+                    'blur(4px)',
+                    'blur(0px)',
+                    'blur(0px)',
+                    'blur(0px)',
+                    'blur(0px)',
+                    'blur(0px)',
+                    'blur(4px)',
+                    'blur(0px)'
+                ],
+                textShadow: [
+                    '3px 3px 0 #ff0d00, -3px -3px 0 #00ffff',
+                    '-3px -3px 0 #ff00ff, 3px 3px 0 #00ffff',
+                    '0px -0px 0 #0400ff, -0px 0px 0 #00ffff',
+                    '-0px 0px 0 #00ff00, 0px -0px 0 #00ffff',
+                    '0px -0px 0 #0400ff, -0px 0px 0 #00ffff',
+                    '-0px 0px 0 #00ff00, 0px -0px 0 #00ffff',
+                    '0px -0px 0 #0400ff, -0px 0px 0 #00ffff',
+                    '-0px 0px 0 #00ff00, 0px -0px 0 #00ffff',
+                    '0px 0px 0 #ff0d00, -3px -3px 0 #00ffff'
+                ],
+                transition: {
+                    repeat: Infinity,
+                    duration: 2
+                }
+            }}
+            className={className}
+        >
+            {children}
+        </motion.span>
+    );
+}
+
+export default GlitchText;
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "Text content to display" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for styling" },
+  ]}
+/>
+
+## Usage Tips
+
+> **Best Practice**: Use this component on dark backgrounds for maximum visual impact. The glitch effect uses bright RGB colors that stand out best against black or dark surfaces.
+
+### Multiple Sizes
+
+```tsx
+<GlitchText className="text-2xl">Small Glitch</GlitchText>
+<GlitchText className="text-6xl">Large Glitch</GlitchText>
+<GlitchText className="text-9xl">Hero Glitch</GlitchText>
+```

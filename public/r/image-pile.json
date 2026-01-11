@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image-pile",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/image-pile.tsx",
+      "content": "'use client';\r\n\r\nimport React, { useEffect, useState } from 'react';\r\nimport Image from 'next/image';\r\nimport { motion } from 'framer-motion';\r\n\r\ntype ImagePileProps = {\r\n    images: string[];\r\n    speed?: number;\r\n};\r\n\r\nexport function ImagePile({ images, speed = 2 }: ImagePileProps) {\r\n    const [topIndex, setTopIndex] = useState(0);\r\n\r\n    useEffect(() => {\r\n        const id = setInterval(() => {\r\n            setTopIndex((prevIndex) => (prevIndex + 1) % images.length);\r\n        }, speed * 1000);\r\n\r\n        return () => clearInterval(id);\r\n    }, [images.length, speed]);\r\n\r\n    return (\r\n        <div className=\"relative h-[200px] sm:h-[260px] md:h-[390px] lg:h-[450px] xl:h-[500px] w-[310px] sm:w-[500px] md:w-[725px] lg:w-[900px] xl:w-[1200px] overflow-visible\">\r\n            {images.map((image, i) => {\r\n                const isTop = topIndex === i;\r\n                const secondTopIndex = (topIndex + 2) % images.length;\r\n                const zIndex = isTop ? 100 : secondTopIndex ? 99 : images.length - i;\r\n                const y: number = Math.random() * 20;\r\n                const x: number = Math.random() * 20;\r\n                const rotation = i * (Math.random() * 1 + 2) - 2;\r\n\r\n                return (\r\n                    <motion.div\r\n                        key={`stacked-card-${i}`}\r\n                        className=\"absolute w-full h-full\"\r\n                        style={{ zIndex, transformOrigin: 'center center' }}\r\n                        animate={{\r\n                            rotateZ: isTop ? 0 : rotation,\r\n                            translateX: Math.random() < 0.5 ? x : -x,\r\n                            opacity: isTop ? [0, 1] : 0.8,\r\n                            translateY: isTop ? [30, Math.random() < 0.5 ? y : -y] : Math.random() < 0.5 ? y : -y,\r\n                            transition: { duration: 0.5 }\r\n                        }}\r\n                        initial={isTop ? { rotateZ: 0 } : { rotateZ: rotation }}\r\n                    >\r\n                        <div className=\"relative h-full w-full overflow-hidden rounded-3xl\">\r\n                            <Image\r\n                                src={image}\r\n                                alt={`stacked-card-${i}`}\r\n                                height={1080}\r\n                                width={1920}\r\n                                className=\"h-full w-full object-cover\"\r\n                                priority={isTop}\r\n                            />\r\n                        </div>\r\n                    </motion.div>\r\n                );\r\n            })}\r\n        </div>\r\n    );\r\n}\r\n\r\nexport default ImagePile;\r\n",
+      "type": "registry:ui",
+      "target": "components/ui/image-pile.tsx"
+    }
+  ]
+}

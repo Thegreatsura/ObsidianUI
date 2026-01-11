@@ -1,0 +1,70 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Masonry Grid
+
+A responsive masonry-style image grid with hover animations and lightbox support.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <video autoPlay loop muted playsInline className="w-full h-auto max-h-[600px] object-cover">
+        <source src="/demos/masonry-grid.mp4" type="video/mp4" />
+      </video>
+    </div>
+  }
+  code={`import { MasonryGrid } from '@/components/ui/masonry-grid'
+
+export function Demo() {
+  return (
+    <MasonryGrid
+      images={["/image1.jpg", "/image2.jpg", "/image3.jpg"]}
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="masonry-grid" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Create a file <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>:</p>
+    <CodeBlock language="tsx" code={`import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`} />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/masonry-grid.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { MasonryGrid } from "@/components/ui/masonry-grid"
+
+export function Demo() {
+  return (
+    <MasonryGrid images={["/image1.jpg", "/image2.jpg", "/image3.jpg"]} />
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "images", type: "string[]", defaultValue: "-", description: "Array of image URLs" },
+    { prop: "columns", type: "number", defaultValue: "3", description: "Number of columns" }
+  ]}
+/>

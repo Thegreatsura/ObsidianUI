@@ -1,0 +1,131 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { Neumorphism3DButton } from '@/components/ui/neumorphism-3d-button'
+
+# Neumorphism 3D Button
+
+A stunning neumorphic button with realistic 3D depth, soft shadows, and tactile press feedback. Features smooth state transitions and works beautifully in both light and dark modes.
+
+<ComponentPreview
+  component={
+    <div className="flex items-center justify-center p-16 bg-neutral-200 dark:bg-neutral-900 rounded-lg scale-150">
+      <Neumorphism3DButton>
+        Press Me
+      </Neumorphism3DButton>
+    </div>
+  }
+  code={`import { Neumorphism3DButton } from '@/components/ui/neumorphism-3d-button'
+
+export function Demo() {
+  return (
+    <Neumorphism3DButton>
+      Press Me
+    </Neumorphism3DButton>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="neumorphism-3d-button" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/neumorphism-3d-button.tsx</code></p>
+</Dependencies>
+
+```tsx
+"use client"
+
+import React from "react"
+import { cn } from "@/lib/utils"
+
+interface Neumorphism3DButtonProps {
+  children?: React.ReactNode
+  onClick?: () => void
+  disabled?: boolean
+}
+
+export const Neumorphism3DButton = ({ 
+  children = "Click Me", 
+  onClick, 
+  disabled 
+}: Neumorphism3DButtonProps) => {
+  const [isActive, setIsActive] = React.useState(false)
+
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      onMouseDown={() => setIsActive(true)}
+      onMouseUp={() => setIsActive(false)}
+      onMouseLeave={() => setIsActive(false)}
+      className={cn(
+        "relative rounded-full cursor-pointer outline-none transition-all duration-300",
+        "bg-neutral-200 dark:bg-neutral-900",
+        // Neumorphic shadows...
+      )}
+    >
+      {/* 3D depth layers */}
+    </button>
+  )
+}
+```
+
+> **Note**: The full implementation includes complex shadow layering for the 3D effect. Install via CLI for complete code.
+
+## Examples
+
+### With Click Handler
+
+```tsx
+import { Neumorphism3DButton } from '@/components/ui/neumorphism-3d-button'
+
+export function WithHandler() {
+  return (
+    <Neumorphism3DButton onClick={() => alert('Clicked!')}>
+      Click Me
+    </Neumorphism3DButton>
+  )
+}
+```
+
+### Disabled State
+
+```tsx
+import { Neumorphism3DButton } from '@/components/ui/neumorphism-3d-button'
+
+export function Disabled() {
+  return (
+    <Neumorphism3DButton disabled>
+      Disabled
+    </Neumorphism3DButton>
+  )
+}
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "React.ReactNode", defaultValue: "Click Me", description: "Button content" },
+    { prop: "onClick", type: "() => void", defaultValue: "-", description: "Click handler function" },
+    { prop: "disabled", type: "boolean", defaultValue: "false", description: "Disable button interactions" },
+  ]}
+/>
+
+## Features
+
+- **Realistic 3D Depth**: Multi-layer shadows create true depth
+- **Tactile Feedback**: Press animation mimics physical button
+- **Neumorphic Design**: Soft, extruded appearance
+- **Dark Mode**: Adapts shadows for dark backgrounds
+- **Smooth Transitions**: All state changes are animated
+- **Accessible**: Supports disabled state and click handlers

@@ -1,0 +1,66 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import IconWheel from '@/components/ui/icon-wheel'
+
+export const demoIcons = [
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+]
+
+# Icon Wheel
+
+A beautiful rotating wheel of icons that spin smoothly around a central point. Perfect for showcasing tech stacks, skills, or brand logos.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[420px] rounded-lg overflow-hidden bg-gradient-to-br from-slate-50 via-neutral-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 flex items-center justify-center">
+      <IconWheel icons={demoIcons} radius={130} iconSize={36} duration={30} />
+    </div>
+  }
+  code={`import IconWheel from '@/components/ui/icon-wheel'
+
+const icons = [
+  "/icon1.svg",
+  "/icon2.svg",
+  "/icon3.svg",
+  // ... more icons
+]
+
+export function Demo() {
+  return <IconWheel icons={icons} radius={150} iconSize={48} duration={20} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="icon-wheel" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/icon-wheel.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "icons", type: "string[]", defaultValue: "Required", description: "Array of icon image URLs" },
+    { prop: "radius", type: "number", defaultValue: "150", description: "Radius of the wheel in pixels" },
+    { prop: "iconSize", type: "number", defaultValue: "48", description: "Size of each icon in pixels" },
+    { prop: "duration", type: "number", defaultValue: "20", description: "Duration of one full rotation in seconds" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional class names" }
+  ]}
+/>

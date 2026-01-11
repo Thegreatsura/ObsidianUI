@@ -1,0 +1,52 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import LiquidText from '@/components/ui/liquid-text'
+
+# 3D Displacement Text
+
+An interactive WebGL text effect with 3D displacement that responds to mouse movement. Creates a liquid, morphing effect on the text.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[450px] rounded-lg overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 flex items-center justify-center">
+      <LiquidText text="MORPH" fontSize={140} color="#ffffff" className="h-full" />
+    </div>
+  }
+  code={`import LiquidText from '@/components/ui/liquid-text'
+
+export function Demo() {
+  return <LiquidText text="MORPH" fontSize={140} color="#ffffff" />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="liquid-text" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install three clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/liquid-text.tsx</code></p>
+</Dependencies>
+
+> **Note**: This component uses Three.js for WebGL rendering. Install via CLI for the full shader implementation.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "text", type: "string", defaultValue: "'Liquid Text'", description: "Text to display" },
+    { prop: "fontSize", type: "number", defaultValue: "200", description: "Font size in pixels" },
+    { prop: "font", type: "string", defaultValue: "'Inter, sans-serif'", description: "Font family" },
+    { prop: "color", type: "string", defaultValue: "-", description: "Fixed text color" },
+    { prop: "lightColor", type: "string", defaultValue: "'#000000'", description: "Light mode color" },
+    { prop: "darkColor", type: "string", defaultValue: "'#ffffff'", description: "Dark mode color" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>

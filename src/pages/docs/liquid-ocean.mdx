@@ -1,0 +1,50 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import LiquidOcean from '@/components/ui/liquid-ocean'
+
+# Liquid Ocean
+
+A mesmerizing WebGL shader background that simulates liquid ocean waves. Creates a beautiful, dynamic backdrop for hero sections or loading screens.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[400px] rounded-lg overflow-hidden">
+      <LiquidOcean />
+    </div>
+  }
+  code={`import LiquidOcean from '@/components/ui/liquid-ocean'
+
+export function Demo() {
+  return (
+    <div className="relative h-screen">
+      <LiquidOcean />
+    </div>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="liquid-ocean" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/liquid-ocean.tsx</code></p>
+</Dependencies>
+
+> **Note**: This is a WebGL shader component. Install via CLI for the full source code.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>

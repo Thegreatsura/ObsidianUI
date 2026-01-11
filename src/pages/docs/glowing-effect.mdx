@@ -1,0 +1,190 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { GlowingEffect } from '@/components/ui/glowing-effect'
+import { Box, Settings, Sparkles, Search } from 'lucide-react'
+
+# Glowing Effect
+
+An interactive glowing border effect that follows your cursor. Creates a stunning animated glow around cards and containers with vibrant gradient colors.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full min-h-[500px] rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-950 p-8 flex items-center justify-center">
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full max-w-4xl">
+        <li className="min-h-[14rem] list-none">
+          <div className="relative h-full rounded-2xl border border-neutral-200 dark:border-neutral-800 p-2 bg-white dark:bg-neutral-900">
+            <GlowingEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+              borderWidth={3}
+            />
+            <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
+              <div className="w-fit rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-2">
+                <Box className="h-4 w-4 text-neutral-600 dark:text-white" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">Do things the right way</h3>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">Running out of copy so I'll write anything.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li className="min-h-[14rem] list-none">
+          <div className="relative h-full rounded-2xl border border-neutral-200 dark:border-neutral-800 p-2 bg-white dark:bg-neutral-900">
+            <GlowingEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+              borderWidth={3}
+            />
+            <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
+              <div className="w-fit rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-2">
+                <Settings className="h-4 w-4 text-neutral-600 dark:text-white" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">The best AI code editor ever.</h3>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">Yes, it's true. I'm not even kidding. Ask my mom if you don't believe me.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li className="min-h-[14rem] list-none">
+          <div className="relative h-full rounded-2xl border border-neutral-200 dark:border-neutral-800 p-2 bg-white dark:bg-neutral-900">
+            <GlowingEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+              borderWidth={3}
+            />
+            <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
+              <div className="w-fit rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-2">
+                <Sparkles className="h-4 w-4 text-neutral-600 dark:text-white" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">This card is also built by Cursor</h3>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">I'm not even kidding. Ask my mom if you don't believe me.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li className="min-h-[14rem] list-none">
+          <div className="relative h-full rounded-2xl border border-neutral-200 dark:border-neutral-800 p-2 bg-white dark:bg-neutral-900">
+            <GlowingEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+              borderWidth={3}
+            />
+            <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
+              <div className="w-fit rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-2">
+                <Search className="h-4 w-4 text-neutral-600 dark:text-white" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">Coming soon on ObsidianUI</h3>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">I'm writing the code as I record this, no kidding.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  }
+  code={`import { GlowingEffect } from '@/components/ui/glowing-effect'
+import { Box } from 'lucide-react'
+
+export function Demo() {
+  return (
+    <div className="relative h-56 rounded-2xl border p-2 bg-white">
+      <GlowingEffect
+        spread={40}
+        glow={true}
+        disabled={false}
+        proximity={64}
+        inactiveZone={0.01}
+        borderWidth={3}
+      />
+      <div className="relative h-full rounded-xl border bg-white p-6">
+        <div className="w-fit rounded-lg border bg-neutral-100 p-2">
+          <Box className="h-4 w-4" />
+        </div>
+        <h3 className="mt-4 text-xl font-semibold">Card Title</h3>
+        <p className="text-sm text-neutral-500">Card description here.</p>
+      </div>
+    </div>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="glowing-effect" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/glowing-effect.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full source code with animation and cursor tracking logic.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "blur", type: "number", defaultValue: "0", description: "Blur amount for the glow effect" },
+    { prop: "inactiveZone", type: "number", defaultValue: "0.7", description: "Dead zone in center where glow is inactive (0-1)" },
+    { prop: "proximity", type: "number", defaultValue: "0", description: "Distance for cursor detection" },
+    { prop: "spread", type: "number", defaultValue: "20", description: "Spread of the glow gradient" },
+    { prop: "variant", type: "'default' | 'white'", defaultValue: "'default'", description: "Color variant of the glow" },
+    { prop: "glow", type: "boolean", defaultValue: "false", description: "Enable/disable the glow effect" },
+    { prop: "disabled", type: "boolean", defaultValue: "true", description: "Disable cursor tracking" },
+    { prop: "movementDuration", type: "number", defaultValue: "2", description: "Animation duration in seconds" },
+    { prop: "borderWidth", type: "number", defaultValue: "1", description: "Width of the glowing border" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>
+
+## Usage Tips
+
+### Enable Interactive Mode
+
+Set `disabled={false}` and `glow={true}` to enable the interactive cursor-following effect:
+
+```tsx
+<GlowingEffect
+  disabled={false}
+  glow={true}
+  proximity={64}
+  spread={40}
+  inactiveZone={0.01}
+  borderWidth={3}
+/>
+```
+
+### Card Layout
+
+Wrap your content in a relative container with padding for the border:
+
+```tsx
+<div className="relative rounded-2xl border p-2 bg-white">
+  <GlowingEffect disabled={false} glow={true} />
+  <div className="relative rounded-xl border bg-white p-6">
+    {/* Your content */}
+  </div>
+</div>
+```

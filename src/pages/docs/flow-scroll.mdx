@@ -1,0 +1,58 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Flow Scroll
+
+A smooth scroll-driven animation where elements flow and transform as you scroll through the page. Creates a cinematic experience.
+
+<ComponentPreview
+  component={
+    <video
+      className="w-full h-[400px] object-cover rounded-lg"
+      autoPlay
+      loop
+      muted
+      playsInline
+    >
+      <source src="/demos/flow-scroll.mp4" type="video/mp4" />
+    </video>
+  }
+  code={`import FlowScroll from '@/components/ui/flow-scroll'
+
+export function Demo() {
+  return (
+    <FlowScroll>
+      <FlowItem>Section 1</FlowItem>
+      <FlowItem>Section 2</FlowItem>
+      <FlowItem>Section 3</FlowItem>
+    </FlowScroll>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="flow-scroll" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/flow-scroll.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full scroll-triggered animation implementation.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "FlowItem children" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>

@@ -1,0 +1,74 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import PhotoGallery from '@/components/ui/photo-gallery'
+
+# Photo Gallery
+
+An interactive photo gallery with rows of images that can be clicked to view in a modal. Features smooth layout animations and lazy loading for optimal performance.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[400px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950">
+      <PhotoGallery 
+        photos={[
+          { url: 'https://i.pravatar.cc/200?img=1', title: 'Photo 1' },
+          { url: 'https://i.pravatar.cc/200?img=2', title: 'Photo 2' },
+          { url: 'https://i.pravatar.cc/200?img=3', title: 'Photo 3' },
+          { url: 'https://i.pravatar.cc/200?img=4', title: 'Photo 4' },
+          { url: 'https://i.pravatar.cc/200?img=5', title: 'Photo 5' },
+          { url: 'https://i.pravatar.cc/200?img=6', title: 'Photo 6' },
+        ]}
+        rows={3}
+        title="Gallery"
+        vignette={false}
+      />
+    </div>
+  }
+  code={`import PhotoGallery from '@/components/ui/photo-gallery'
+
+export function Demo() {
+  const photos = [
+    { url: 'https://i.pravatar.cc/200?img=1', title: 'Photo 1' },
+    { url: 'https://i.pravatar.cc/200?img=2', title: 'Photo 2' },
+    { url: 'https://i.pravatar.cc/200?img=3', title: 'Photo 3' },
+  ]
+
+  return (
+    <PhotoGallery 
+      photos={photos}
+      rows={3}
+      title="My Gallery"
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="photo-gallery" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/photo-gallery.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full source code with Vignette, SelectedPhotoItem, and PhotoItem components.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "photos", type: "Photo[]", defaultValue: "[]", description: "Array of photos with url and optional title" },
+    { prop: "rows", type: "number", defaultValue: "5", description: "Number of rows in the gallery" },
+    { prop: "className", type: "string", defaultValue: "''", description: "Additional CSS classes" },
+    { prop: "vignette", type: "boolean", defaultValue: "true", description: "Show edge vignette effect" },
+    { prop: "title", type: "string", defaultValue: "'Gallery'", description: "Gallery title" },
+  ]}
+/>

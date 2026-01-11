@@ -1,0 +1,109 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import ExpandableBentoGrid from '@/components/ui/expandable-bento-grid'
+import { Zap, Star, Heart, Sparkles, Globe, Rocket } from 'lucide-react'
+
+export const demoItems = [
+  {
+    id: 1,
+    title: "Lightning Fast",
+    subtitle: "Optimized for speed",
+    description: "Experience blazing fast performance with our optimized components.",
+    content: <p>Our components are built with performance in mind, ensuring smooth animations and quick load times.</p>,
+    icon: <Zap className="w-6 h-6" />
+  },
+  {
+    id: 2,
+    title: "Beautiful Design",
+    subtitle: "Modern aesthetics",
+    description: "Stunning visuals that make your app stand out.",
+    content: <p>Carefully crafted designs that follow modern UI/UX principles.</p>,
+    icon: <Star className="w-6 h-6" />
+  },
+  {
+    id: 3,
+    title: "Built with Love",
+    subtitle: "Quality first",
+    description: "Every component is crafted with attention to detail.",
+    content: <p>We put care and attention into every pixel.</p>,
+    icon: <Heart className="w-6 h-6" />
+  },
+  {
+    id: 4,
+    title: "Animations",
+    subtitle: "Smooth & fluid",
+    description: "Delightful micro-interactions that enhance UX.",
+    content: <p>Powered by Framer Motion for butter-smooth animations.</p>,
+    icon: <Sparkles className="w-6 h-6" />
+  },
+  {
+    id: 5,
+    title: "Global Ready",
+    subtitle: "Works everywhere",
+    description: "Responsive and accessible components.",
+    content: <p>Works seamlessly across all devices and screen sizes.</p>,
+    icon: <Globe className="w-6 h-6" />
+  },
+  {
+    id: 6,
+    title: "Launch Ready",
+    subtitle: "Production grade",
+    description: "Battle-tested components for your projects.",
+    content: <p>Ready to use in your production applications.</p>,
+    icon: <Rocket className="w-6 h-6" />
+  }
+]
+
+# Expandable Bento Grid
+
+An interactive bento-style grid with expandable cards that reveal details on click.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full min-h-[400px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 p-4">
+      <ExpandableBentoGrid items={demoItems} />
+    </div>
+  }
+  code={`import ExpandableBentoGrid from '@/components/ui/expandable-bento-grid'
+import { Zap, Star, Heart } from 'lucide-react'
+
+const items = [
+  {
+    id: 1,
+    title: "Lightning Fast",
+    subtitle: "Optimized for speed",
+    description: "Experience blazing fast performance.",
+    content: <p>Built for performance.</p>,
+    icon: <Zap className="w-6 h-6" />
+  },
+  // ... more items
+]
+
+export function Demo() {
+  return <ExpandableBentoGrid items={items} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="expandable-bento-grid" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/expandable-bento-grid.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "{ id, title, subtitle?, description?, content, icon?, className? }[]", defaultValue: "-", description: "Array of grid items" }
+  ]}
+/>

@@ -1,0 +1,72 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Eagle Vision
+
+A cursor-following targeting effect inspired by Assassin's Creed. The rings change size and color based on proximity to a target element, creating an immersive "lock-on" experience.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <video autoPlay loop muted playsInline className="w-full h-auto max-h-[600px] object-cover">
+        <source src="/demos/eagle-vision.mp4" type="video/mp4" />
+      </video>
+    </div>
+  }
+  code={`import { EagleVision, EagleVisionTarget } from '@/components/ui/eagle-vision'
+
+export function Demo() {
+  return (
+    <>
+      <EagleVision />
+      <EagleVisionTarget>
+        <button className="px-4 py-2 bg-blue-500 text-white rounded">
+          Find Me
+        </button>
+      </EagleVisionTarget>
+    </>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="eagle-vision" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/eagle-vision.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { EagleVision, EagleVisionTarget } from "@/components/ui/eagle-vision"
+
+export function Demo() {
+  return (
+    <div>
+      <EagleVision />
+      <EagleVisionTarget>
+        <button className="px-4 py-2 bg-blue-500 text-white rounded">
+          Find Me
+        </button>
+      </EagleVisionTarget>
+    </div>
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "EagleVision", type: "component", defaultValue: "-", description: "Renders cursor-following targeting rings" },
+    { prop: "EagleVisionTarget", type: "component", defaultValue: "-", description: "Wrapper for target element" }
+  ]}
+/>

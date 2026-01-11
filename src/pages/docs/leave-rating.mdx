@@ -1,0 +1,71 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Leave Rating
+
+An interactive star rating component with an animated emoji face that changes expression based on the selected rating.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <video autoPlay loop muted playsInline className="w-full h-auto max-h-[600px] object-cover">
+        <source src="/demos/leave-rating.mp4" type="video/mp4" />
+      </video>
+    </div>
+  }
+  code={`import { LeaveRating } from '@/components/ui/leave-rating'
+
+export function Demo() {
+  return <LeaveRating onSubmit={(rating) => console.log(rating)} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="leave-rating" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Create a file <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>:</p>
+    <CodeBlock language="tsx" code={`import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`} />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/leave-rating.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { LeaveRating } from "@/components/ui/leave-rating"
+
+export function Demo() {
+  return (
+    <LeaveRating
+      question="How was your experience?"
+      buttonText="Submit"
+      onSubmit={(rating) => console.log("Rating:", rating)}
+    />
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "question", type: "string", defaultValue: '"How was your experience?"', description: "Question text" },
+    { prop: "buttonText", type: "string", defaultValue: '"Submit"', description: "Submit button text" },
+    { prop: "onSubmit", type: "(rating: number | false) => void", defaultValue: "-", description: "Callback on submit" }
+  ]}
+/>

@@ -1,0 +1,60 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import MaskedAvatars from '@/components/ui/masked-avatars'
+
+# Masked Avatars
+
+A stunning avatar stack with masked overlapping effects and animated text rings on hover. Each avatar reveals the person's name in a circular pattern when hovered.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-neutral-100 dark:bg-zinc-900 flex items-center justify-center">
+      <MaskedAvatars />
+    </div>
+  }
+  code={`import MaskedAvatars from '@/components/ui/masked-avatars'
+
+export function Demo() {
+  const avatars = [
+    { avatar: 'https://i.pravatar.cc/150?u=1', name: 'Emma' },
+    { avatar: 'https://i.pravatar.cc/150?u=2', name: 'James' },
+    { avatar: 'https://i.pravatar.cc/150?u=3', name: 'Sophie' },
+  ]
+  
+  return <MaskedAvatars avatars={avatars} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="masked-avatars" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/masked-avatars.tsx</code></p>
+</Dependencies>
+
+> **Note**: This is a complex component with 200+ lines. Install via CLI for the full source code.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "avatars", type: "Avatar[]", defaultValue: "[...defaults]", description: "Array of avatars with avatar URL and name" },
+    { prop: "size", type: "number", defaultValue: "70", description: "Base size of each avatar" },
+    { prop: "border", type: "number", defaultValue: "8", description: "Border width" },
+    { prop: "column", type: "number", defaultValue: "40", description: "Column spacing" },
+    { prop: "movement", type: "number", defaultValue: "0.72", description: "Hover lift sensitivity" },
+    { prop: "transition", type: "number", defaultValue: "0.18", description: "Animation duration" },
+    { prop: "ringed", type: "boolean", defaultValue: "true", description: "Show text ring on hover" },
+    { prop: "blurOnRest", type: "boolean", defaultValue: "true", description: "Blur non-hovered avatars" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>

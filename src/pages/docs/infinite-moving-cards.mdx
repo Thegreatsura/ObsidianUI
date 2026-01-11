@@ -1,0 +1,59 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import InfiniteMovingCards from '@/components/ui/infinite-moving-cards'
+
+export const demoItems = [
+  { quote: "This component library has transformed our development workflow. The animations are butter smooth!", name: "Sarah Chen", title: "Lead Developer" },
+  { quote: "Incredible attention to detail. Every component feels premium and polished.", name: "Michael Brown", title: "Design Engineer" },
+  { quote: "Best UI library I've used. The documentation is clear and components just work.", name: "Emily Davis", title: "Frontend Developer" },
+  { quote: "The glassmorphism effects are stunning. Our users love the modern aesthetic.", name: "Alex Johnson", title: "Product Designer" },
+]
+
+# Infinite Moving Cards
+
+A testimonial carousel that scrolls infinitely with customizable speed and direction.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[350px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 flex items-center justify-center">
+      <InfiniteMovingCards items={demoItems} speed="slow" />
+    </div>
+  }
+  code={`import InfiniteMovingCards from '@/components/ui/infinite-moving-cards'
+
+const testimonials = [
+  { quote: "Amazing library!", name: "John Doe", title: "Developer" },
+  { quote: "Love the animations!", name: "Jane Smith", title: "Designer" },
+]
+
+export function Demo() {
+  return <InfiniteMovingCards items={testimonials} speed="slow" />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="infinite-moving-cards" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/infinite-moving-cards.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "{ quote, name, title }[]", defaultValue: "Required", description: "Array of testimonial items" },
+    { prop: "direction", type: "'left' | 'right'", defaultValue: "'left'", description: "Scroll direction" },
+    { prop: "speed", type: "'fast' | 'normal' | 'slow'", defaultValue: "'fast'", description: "Animation speed" },
+    { prop: "pauseOnHover", type: "boolean", defaultValue: "true", description: "Pause on mouse hover" }
+  ]}
+/>

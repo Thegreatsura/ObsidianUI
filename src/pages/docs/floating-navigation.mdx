@@ -1,0 +1,132 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import FloatingNavigation from '@/components/ui/floating-navigation'
+
+# Floating Navigation
+
+A stunning floating navigation bar with smooth animations, icon-specific transitions, and elegant tooltips. Perfect for mobile-first designs and modern web applications.
+
+<ComponentPreview
+  component={<FloatingNavigation position="absolute" />}
+  code={`import FloatingNavigation from '@/components/ui/floating-navigation'
+
+export function Demo() {
+  return <FloatingNavigation />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="floating-navigation" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/floating-navigation.tsx</code></p>
+</Dependencies>
+
+```tsx
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+interface NavItem {
+    id: string;
+    label: string;
+    icon: React.ReactNode;
+}
+
+interface FloatingNavigationProps {
+    items?: NavItem[];
+    className?: string;
+}
+
+// Icon components and default items...
+
+export default function FloatingNavigation({ 
+  items = defaultItems, 
+  className 
+}: FloatingNavigationProps) {
+  const [activeTab, setActiveTab] = useState(items[0].id);
+  const [hoveredTab, setHoveredTab] = useState<string | null>(null);
+  
+  return (
+    <div className={cn("fixed bottom-8 left-1/2 -translate-x-1/2 z-50", className)}>
+      <div className="flex items-center gap-2 p-2 rounded-full border border-neutral-200 dark:border-white/10 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => setActiveTab(item.id)}
+            onMouseEnter={() => setHoveredTab(item.id)}
+            onMouseLeave={() => setHoveredTab(null)}
+            className="relative flex items-center justify-center w-12 h-12 rounded-full"
+          >
+            {/* Active/Hover backgrounds and icon */}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+> **Note**: The full source code includes icon components, animation variants, and keyboard navigation. Install via CLI for the complete implementation.
+
+## Custom Items
+
+You can provide custom navigation items with your own icons:
+
+```tsx
+import FloatingNavigation from '@/components/ui/floating-navigation'
+import { Home, Search, Bell, User, Settings } from 'lucide-react'
+
+const customItems = [
+  { id: 'home', label: 'Home', icon: <Home className="w-5 h-5" /> },
+  { id: 'search', label: 'Search', icon: <Search className="w-5 h-5" /> },
+  { id: 'notifications', label: 'Notifications', icon: <Bell className="w-5 h-5" /> },
+  { id: 'profile', label: 'Profile', icon: <User className="w-5 h-5" /> },
+  { id: 'settings', label: 'Settings', icon: <Settings className="w-5 h-5" /> },
+]
+
+export function CustomDemo() {
+  return <FloatingNavigation items={customItems} />
+}
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "NavItem[]", defaultValue: "defaultItems", description: "Array of navigation items with id, label, and icon" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container" },
+  ]}
+/>
+
+### NavItem Type
+
+```tsx
+interface NavItem {
+  id: string;        // Unique identifier
+  label: string;     // Tooltip label
+  icon: React.ReactNode;  // Icon component
+}
+```
+
+## Features
+
+- **Icon-Specific Animations**: Each icon has unique active state animations
+- **Smooth Transitions**: Spring-based physics for natural movement
+- **Keyboard Navigation**: Arrow keys for accessibility
+- **Hover Tooltips**: Elegant tooltips on hover
+- **Glass Morphism**: Beautiful frosted glass effect
+- **Dark Mode**: Automatic theme adaptation
+- **Fixed Positioning**: Stays at bottom center of viewport
+- **Responsive**: Works on all screen sizes

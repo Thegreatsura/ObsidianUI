@@ -1,0 +1,68 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Rubik Cube
+
+An interactive 3D Rubik's cube that rotates automatically and can be dragged to rotate manually.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <video autoPlay loop muted playsInline className="w-full h-auto max-h-[600px] object-cover">
+        <source src="/demos/rubik-cube.mp4" type="video/mp4" />
+      </video>
+    </div>
+  }
+  code={`import { RubikCube } from '@/components/ui/rubik-cube'
+
+export function Demo() {
+  return <RubikCube mode="normal" dimensionMode="3x3" />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="rubik-cube" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Create a file <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>:</p>
+    <CodeBlock language="tsx" code={`import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`} />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/rubik-cube.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { RubikCube } from "@/components/ui/rubik-cube"
+
+export function Demo() {
+  return (
+    <div className="h-[400px] flex items-center justify-center">
+      <RubikCube mode="normal" dimensionMode="3x3" />
+    </div>
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "mode", type: "'skeleton' | 'normal' | 'glass'", defaultValue: "'normal'", description: "Visual style" },
+    { prop: "dimensionMode", type: "'2x2' | '3x3' | '4x4'", defaultValue: "'3x3'", description: "Cube size" }
+  ]}
+/>

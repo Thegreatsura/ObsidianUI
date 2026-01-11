@@ -1,0 +1,120 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# AI Input
+
+A stunning AI-powered input component with animated gradient border blobs that orbit around the input during loading states. Features file attachment support and beautiful placeholder animations.
+
+<ComponentPreview
+  component={
+    <video
+      className="w-full h-[400px] object-cover rounded-lg"
+      autoPlay
+      loop
+      muted
+      playsInline
+    >
+      <source src="/demos/ai-input.mp4" type="video/mp4" />
+    </video>
+  }
+  code={`import AiInput from '@/components/ui/ai-input'
+
+export function Demo() {
+  const handleSubmit = async (value: string, file: File | null) => {
+    console.log('Submitted:', value, file)
+    // Simulate AI processing
+    await new Promise(resolve => setTimeout(resolve, 2000))
+  }
+
+  return (
+    <AiInput 
+      placeholder="Ask me anything..."
+      onSubmit={handleSubmit}
+      width="400px"
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="ai-input" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/ai-input.tsx</code></p>
+</Dependencies>
+
+```tsx
+'use client';
+
+import { cn } from '@/lib/utils';
+import { ArrowUp, LoaderCircle, Paperclip, X } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+
+type AiInputProps = {
+  width?: string;
+  className?: string;
+  placeholder?: string;
+  rows?: number;
+  mainColor?: string;
+  backgroundColor?: string;
+  onSubmit?: (value: string, file: File | null) => void | Promise<void>;
+  animationStyle?: 'orbit' | 'pulse';
+};
+
+const AiInput = ({
+  width = '400px',
+  placeholder = 'Ask me anything...',
+  mainColor = '#FFDC00',
+  backgroundColor = '#111111',
+  rows = 2,
+  onSubmit,
+  animationStyle = 'orbit',
+}: AiInputProps) => {
+  const [value, setValue] = useState('');
+  const [file, setFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // ... full implementation in source file
+  
+  return (
+    <div style={{ width }} className="relative">
+      {/* Animated blob elements */}
+      <textarea 
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder={placeholder}
+        rows={rows}
+        className="w-full bg-black border border-white/10 rounded-xl p-3 text-white"
+      />
+    </div>
+  );
+};
+
+export default AiInput;
+```
+
+> **Note**: The full source code is available via CLI installation or in the GitHub repository. The component includes complex animation logic for the orbiting gradient blobs.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "width", type: "string", defaultValue: "'400px'", description: "Width of the input container" },
+    { prop: "placeholder", type: "string", defaultValue: "'Ask me anything...'", description: "Placeholder text" },
+    { prop: "rows", type: "number", defaultValue: "2", description: "Number of textarea rows" },
+    { prop: "mainColor", type: "string", defaultValue: "'#FFDC00'", description: "Primary gradient color" },
+    { prop: "backgroundColor", type: "string", defaultValue: "'#111111'", description: "Background color" },
+    { prop: "onSubmit", type: "(value, file) => void", defaultValue: "-", description: "Submit handler" },
+    { prop: "animationStyle", type: "'orbit' | 'pulse'", defaultValue: "'orbit'", description: "Loading animation style" },
+  ]}
+/>

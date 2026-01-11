@@ -1,0 +1,59 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Image Pile
+
+An auto-rotating stack of images that shuffle with smooth animations.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <video autoPlay loop muted playsInline className="w-full h-auto max-h-[600px] object-cover">
+        <source src="/demos/image-pile.mp4" type="video/mp4" />
+      </video>
+    </div>
+  }
+  code={`import { ImagePile } from '@/components/ui/image-pile'
+
+export function Demo() {
+  return (
+    <ImagePile 
+      images={["/image1.jpg", "/image2.jpg", "/image3.jpg"]} 
+      speed={2} 
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="image-pile" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/ui/image-pile.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { ImagePile } from "@/components/ui/image-pile"
+
+export function Demo() {
+  return <ImagePile images={["/1.png", "/2.png", "/3.png"]} speed={3} />
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "images", type: "string[]", defaultValue: "-", description: "Array of image URLs" },
+    { prop: "speed", type: "number", defaultValue: "2", description: "Seconds between shuffles" }
+  ]}
+/>

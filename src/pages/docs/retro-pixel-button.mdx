@@ -1,0 +1,151 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import RetroPixelButton from '@/components/ui/retro-pixel-button'
+
+# Retro Pixel Button
+
+A nostalgic retro-style button with a sliding pixel block animation and rotating arrow icon. Features smooth spring physics and a morphing text effect.
+
+<ComponentPreview
+  component={
+    <div className="flex items-center justify-center p-12 bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 rounded-lg">
+      <RetroPixelButton>
+        TRY FOR FREE
+      </RetroPixelButton>
+    </div>
+  }
+  code={`import RetroPixelButton from '@/components/ui/retro-pixel-button'
+
+export function Demo() {
+  return (
+    <RetroPixelButton>
+      TRY FOR FREE
+    </RetroPixelButton>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="retro-pixel-button" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/retro-pixel-button.tsx</code></p>
+</Dependencies>
+
+```tsx
+"use client";
+
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+interface RetroPixelButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
+  pixelColor?: string;
+  baseColor?: string;
+  textColor?: string;
+}
+
+export default function RetroPixelButton({
+  children = "TRY FOR FREE",
+  pixelColor = "orange",
+  baseColor,
+  textColor,
+  ...props
+}: RetroPixelButtonProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.button
+      className="relative flex items-center h-16 px-8 border border-orange-300 overflow-hidden font-mono font-medium rounded-lg"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      {...props}
+    >
+      {/* Sliding pixel block with icon */}
+      <motion.div
+        animate={{ width: isHovered ? "97%" : "55px" }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      >
+        {/* Pixel arrow icon */}
+      </motion.div>
+
+      {/* Morphing text */}
+      <motion.div
+        animate={{
+          paddingLeft: isHovered ? 0 : 64,
+          color: isHovered ? "#ffffff" : "currentColor",
+        }}
+      >
+        {children}
+      </motion.div>
+    </motion.button>
+  );
+}
+```
+
+> **Note**: The full implementation includes the pixel arrow SVG and blur effects. Install via CLI for complete code.
+
+## Examples
+
+### Custom Colors
+
+```tsx
+import RetroPixelButton from '@/components/ui/retro-pixel-button'
+
+export function CustomColors() {
+  return (
+    <RetroPixelButton 
+      pixelColor="#3b82f6"
+      baseColor="#1e293b"
+      textColor="#ffffff"
+    >
+      CUSTOM STYLE
+    </RetroPixelButton>
+  )
+}
+```
+
+### With Click Handler
+
+```tsx
+import RetroPixelButton from '@/components/ui/retro-pixel-button'
+
+export function WithHandler() {
+  return (
+    <RetroPixelButton onClick={() => console.log('Clicked!')}>
+      CLICK ME
+    </RetroPixelButton>
+  )
+}
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "React.ReactNode", defaultValue: "TRY FOR FREE", description: "Button text content" },
+    { prop: "pixelColor", type: "string", defaultValue: "orange", description: "Color of the sliding pixel block" },
+    { prop: "baseColor", type: "string", defaultValue: "-", description: "Background color override" },
+    { prop: "textColor", type: "string", defaultValue: "-", description: "Text color override" },
+    { prop: "...props", type: "ButtonHTMLAttributes", defaultValue: "-", description: "All standard button props" },
+  ]}
+/>
+
+## Features
+
+- **Retro Aesthetic**: Pixel art arrow and monospace font
+- **Sliding Animation**: Smooth spring-based block expansion
+- **Rotating Icon**: Arrow rotates 180° on hover
+- **Text Morphing**: Blur and color transition effects
+- **Spring Physics**: Natural, bouncy animations
+- **Customizable**: Easy color and style overrides

@@ -1,0 +1,57 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Flip Scroll
+
+A scroll-triggered flip animation where elements rotate and transform as you scroll. Creates a dynamic, engaging scroll experience.
+
+<ComponentPreview
+  component={
+    <video
+      className="w-full h-[400px] object-cover rounded-lg"
+      autoPlay
+      loop
+      muted
+      playsInline
+    >
+      <source src="/demos/flip-scroll.mp4" type="video/mp4" />
+    </video>
+  }
+  code={`import FlipScroll from '@/components/ui/flip-scroll'
+
+export function Demo() {
+  const items = [
+    { title: 'Item 1', content: 'Content...' },
+    { title: 'Item 2', content: 'Content...' },
+  ]
+  
+  return <FlipScroll items={items} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="flip-scroll" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/flip-scroll.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full scroll-triggered animation implementation.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "FlipItem[]", defaultValue: "-", description: "Array of items to flip through" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>

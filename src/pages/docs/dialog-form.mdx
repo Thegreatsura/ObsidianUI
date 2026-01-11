@@ -1,0 +1,74 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import DialogForm from '@/components/ui/dialog-form'
+import { Mail, CheckCircle } from 'lucide-react'
+
+# Dialog Form
+
+An animated dialog form component that expands from a button with smooth layout transitions. Includes success state with shine animation.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 flex items-center justify-center">
+      <DialogForm
+        label="Contact Us"
+        icon={<Mail size={16} />}
+        successText="Message Sent!"
+        successIcon={<CheckCircle size={32} className="text-green-500" />}
+        onSubmit={async () => {
+          await new Promise(r => setTimeout(r, 1500))
+          return { success: true, message: 'Success!' }
+        }}
+      />
+    </div>
+  }
+  code={`import DialogForm from '@/components/ui/dialog-form'
+import { Mail, CheckCircle } from 'lucide-react'
+
+export function Demo() {
+  return (
+    <DialogForm
+      label="Contact Us"
+      icon={<Mail size={16} />}
+      successText="Message Sent!"
+      successIcon={<CheckCircle size={32} />}
+      onSubmit={async () => {
+        await new Promise(r => setTimeout(r, 1500))
+        return { success: true, message: 'Success!' }
+      }}
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="dialog-form" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion lucide-react usehooks-ts clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/dialog-form.tsx</code></p>
+</Dependencies>
+
+> **Note**: This is a large component (370+ lines). Install via CLI for the full source code with animations.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "label", type: "string", defaultValue: "-", description: "Button/dialog title" },
+    { prop: "successText", type: "string", defaultValue: "-", description: "Text shown on success" },
+    { prop: "successIcon", type: "React.ReactNode", defaultValue: "-", description: "Icon shown on success" },
+    { prop: "icon", type: "React.ReactNode", defaultValue: "-", description: "Icon for the button" },
+    { prop: "childComponent", type: "React.ReactNode", defaultValue: "-", description: "Form content inside dialog" },
+    { prop: "onSubmit", type: "() => Promise<{success, message}>", defaultValue: "-", description: "Submit handler" },
+    { prop: "onClose", type: "() => void", defaultValue: "-", description: "Close callback" },
+  ]}
+/>

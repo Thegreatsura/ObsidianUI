@@ -1,0 +1,46 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Folder Preview
+
+An interactive 3D folder that opens to reveal image contents.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <video autoPlay loop muted playsInline className="w-full h-auto max-h-[600px] object-cover">
+        <source src="/demos/interactive-folder.mp4" type="video/mp4" />
+      </video>
+    </div>
+  }
+  code={`import { FolderPreview } from '@/components/ui/folder-preview'
+
+export function Demo() {
+  return <FolderPreview images={["/1.jpg", "/2.jpg"]} folderName="Photos" />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="folder-preview" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/folder-preview.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "images", type: "string[]", defaultValue: "-", description: "Array of image URLs" },
+    { prop: "folderName", type: "string", defaultValue: "'Folder'", description: "Folder name" }
+  ]}
+/>

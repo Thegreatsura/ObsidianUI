@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glitch-text",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/glitch-text.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from 'react';\r\nimport { motion } from 'framer-motion';\r\n\r\ninterface GlitchTextProps {\r\n    children: React.ReactNode;\r\n    className?: string;\r\n}\r\n\r\nexport function GlitchText({ children, className }: GlitchTextProps) {\r\n    return (\r\n        <motion.span\r\n            animate={{\r\n                x: [0, 0, 0, 2, 0, 2, 2],\r\n                y: [2, -2, -2, 0, 0, 2, 0],\r\n                filter: [\r\n                    'blur(0px)',\r\n                    'blur(0px)',\r\n                    'blur(0px)',\r\n                    'blur(2px)',\r\n                    'blur(4px)',\r\n                    'blur(0px)',\r\n                    'blur(0px)',\r\n                    'blur(0px)',\r\n                    'blur(0px)',\r\n                    'blur(0px)',\r\n                    'blur(4px)',\r\n                    'blur(0px)'\r\n                ],\r\n                textShadow: [\r\n                    '3px 3px 0 #ff0d00, -3px -3px 0 #00ffff',\r\n                    '-3px -3px 0 #ff00ff, 3px 3px 0 #00ffff',\r\n                    '0px -0px 0 #0400ff, -0px 0px 0 #00ffff',\r\n                    '-0px 0px 0 #00ff00, 0px -0px 0 #00ffff',\r\n                    '0px -0px 0 #0400ff, -0px 0px 0 #00ffff',\r\n                    '-0px 0px 0 #00ff00, 0px -0px 0 #00ffff',\r\n                    '0px -0px 0 #0400ff, -0px 0px 0 #00ffff',\r\n                    '-0px 0px 0 #00ff00, 0px -0px 0 #00ffff',\r\n                    '0px 0px 0 #ff0d00, -3px -3px 0 #00ffff'\r\n                ],\r\n                transition: {\r\n                    repeat: Infinity,\r\n                    duration: 2\r\n                }\r\n            }}\r\n            className={className}\r\n        >\r\n            {children}\r\n        </motion.span>\r\n    );\r\n}\r\n\r\nexport default GlitchText;\r\n",
+      "type": "registry:ui",
+      "target": "components/ui/glitch-text.tsx"
+    }
+  ]
+}

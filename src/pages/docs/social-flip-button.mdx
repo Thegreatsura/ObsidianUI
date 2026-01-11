@@ -1,0 +1,36 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import SocialFlipButton from '@/components/ui/social-flip-button'
+
+# Social Flip Button
+
+A social media contact button with flip animation.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 flex items-center justify-center">
+      <SocialFlipButton />
+    </div>
+  }
+  code={`import SocialFlipButton from '@/components/ui/social-flip-button'
+
+export function Demo() {
+  return <SocialFlipButton />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="social-flip-button" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install framer-motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/ui/social-flip-button.tsx</code></p>
+</Dependencies>
