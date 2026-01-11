@@ -49,29 +49,29 @@ export default function ExpandableBentoGrid({ items }: BentoGridProps) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/40 h-full w-full z-[100000]"
+                        className="fixed inset-0 bg-black/20 h-full w-full z-[10000]"
                     />
                 )}
             </AnimatePresence>
             <AnimatePresence>
                 {active && typeof active === 'object' ? (
-                    <div className="fixed inset-0 grid place-items-center z-[100001] p-4">
+                    <div className=" fixed inset-0 top-16 grid place-items-center z-[10001] ">
                         <motion.button
                             key={`button-${active.title}-${id}`}
                             layout
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0, transition: { duration: 0.05 } }}
-                            className="flex absolute top-4 right-4 items-center justify-center bg-white dark:bg-neutral-800 rounded-full h-8 w-8 shadow-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors z-10"
+                            className="flex absolute top-2 right-2 md:right-10 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
                             onClick={() => setActive(null)}
                         >
-                            <X className="h-5 w-5 text-neutral-700 dark:text-white" />
+                            <X className="h-4 w-4 dark:text-white text-black" />
 
                         </motion.button>
                         <motion.div
                             layoutId={`card-${active.title}-${id}`}
                             ref={ref}
-                            className="w-full max-w-[500px] h-auto max-h-[85vh] flex flex-col bg-white dark:bg-neutral-900 rounded-3xl overflow-hidden shadow-2xl"
+                            className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
                         >
                             <motion.div layoutId={`image-${active.title}-${id}`}>
                                 <div className="w-full h-40 md:h-50 lg:h-60 bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center perspective-distant transform-3d">

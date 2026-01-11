@@ -31,47 +31,44 @@ export const ClickSpark = ({
 }: ClickSparkProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
-  const startTimeRef = useRef<number | null>(null);
+  const animationIdRef = useRef<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
 
-  // Ensure component is mounted before rendering to prevent hydration issues
+  const effectiveColor = sparkColor || (resolvedTheme === "dark" ? "#fff" : "#000");
+
+  // Ensure component is mounted on client
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const effectiveColor = sparkColor || (mounted && resolvedTheme === "dark" ? "#fff" : "#000");
-
+  // Handle canvas resize
   useEffect(() => {
+    if (!mounted) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    let resizeTimeout: NodeJS.Timeout;
-
     const resizeCanvas = () => {
-      if (typeof window !== "undefined") {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.scale(dpr, dpr);
       }
     };
 
-    const handleResize = () => {
-      if (typeof window !== "undefined") {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(resizeCanvas, 100);
-      }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
     };
-
-    if (typeof window !== "undefined") {
-      resizeCanvas();
-      window.addEventListener("resize", handleResize);
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-        clearTimeout(resizeTimeout);
-      };
-    }
-  }, []);
+  }, [mounted]);
 
   const easeFunc = useCallback(
     (t: number) => {
@@ -90,20 +87,18 @@ export const ClickSpark = ({
     [easing]
   );
 
+  // Animation loop
   useEffect(() => {
+    if (!mounted) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
-
     const draw = (timestamp: number) => {
-      if (!startTimeRef.current) {
-        startTimeRef.current = timestamp;
-      }
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const dpr = window.devicePixelRatio || 1;
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
 
       sparksRef.current = sparksRef.current.filter((spark) => {
         const elapsed = timestamp - spark.startTime;
@@ -124,6 +119,7 @@ export const ClickSpark = ({
 
         ctx.strokeStyle = effectiveColor;
         ctx.lineWidth = 2;
+        ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -132,54 +128,59 @@ export const ClickSpark = ({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      animationIdRef.current = requestAnimationFrame(draw);
     };
 
-    animationId = requestAnimationFrame(draw);
+    animationIdRef.current = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
     };
-  }, [sparkColor, effectiveColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
+  }, [mounted, effectiveColor, sparkSize, sparkRadius, duration, easeFunc, extraScale]);
 
-  const handleClick = (e: MouseEvent) => {
-    const x = e.clientX;
-    const y = e.clientY;
-    const now = performance.now();
-    const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
-      x,
-      y,
-      angle: (2 * Math.PI * i) / sparkCount,
-      startTime: now,
-    }));
-
-    sparksRef.current.push(...newSparks);
-  };
-
+  // Handle click events
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, [sparkCount]);
+    if (!mounted) return;
 
-  // Don't render until mounted to prevent hydration mismatch
-  if (!mounted) {
-    return null;
-  }
+    const handleClick = (e: MouseEvent) => {
+      // Use clientX/Y which are relative to the viewport
+      const x = e.clientX;
+      const y = e.clientY;
+      const now = performance.now();
+
+      const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
+        x,
+        y,
+        angle: (2 * Math.PI * i) / sparkCount,
+        startTime: now,
+      }));
+
+      sparksRef.current.push(...newSparks);
+    };
+
+    // Use capture phase to ensure we get clicks before they might be stopped
+    document.addEventListener("click", handleClick, true);
+
+    return () => {
+      document.removeEventListener("click", handleClick, true);
+    };
+  }, [mounted, sparkCount]);
+
+  if (!mounted) return null;
 
   return (
     <canvas
       ref={canvasRef}
       style={{
-        width: "100%",
-        height: "100%",
         position: "fixed",
         top: 0,
         left: 0,
+        width: "100vw",
+        height: "100vh",
         pointerEvents: "none",
-        zIndex: 9999,
+        zIndex: 99999,
       }}
     />
   );
