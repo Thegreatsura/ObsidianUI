@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -11,15 +11,21 @@ import { GithubButton } from "@/components/github-button";
 export const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const lastUpdateRef = useRef<number>(0);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  // Throttled mouse move handler for better performance
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const now = Date.now();
+    if (now - lastUpdateRef.current < 32) return; // Throttle to ~30fps
+    lastUpdateRef.current = now;
+
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     setMousePosition({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
     });
-  };
+  }, []);
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -118,7 +124,7 @@ export const HeroSection = () => {
                         src={user.avatar}
                         alt={user.name}
                         className="w-10 h-10 rounded-full border-2 border-white bg-white shadow-sm transition-all duration-300 group-hover:shadow-lg"
-                        whileHover={{ 
+                        whileHover={{
                           y: -8,
                           scale: 1.1,
                           zIndex: 10,

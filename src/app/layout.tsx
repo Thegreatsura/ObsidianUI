@@ -4,7 +4,6 @@ import { Inter_Tight, Pixelify_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Footer from "@/components/mine/landing-page/footer";
-import { ClickSpark } from "@/components/ui/click-spark";
 
 // Default font
 const interTight = Inter_Tight({
@@ -94,13 +93,6 @@ export default function RootLayout({
         className={`${interTight.variable} ${pixelify.variable} ${playfair.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ClickSpark
-            sparkColor={undefined}
-            sparkSize={10}
-            sparkRadius={15}
-            sparkCount={8}
-            duration={400}
-          />
           {children}
           <Footer />
           <Analytics />
@@ -109,4 +101,3 @@ export default function RootLayout({
     </html>
   );
 }
-

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { useTheme } from "next-themes";
 
 interface Spark {
@@ -31,44 +31,41 @@ export const ClickSpark = ({
 }: ClickSparkProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
-  const animationIdRef = useRef<number | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme } = useTheme();
+  const startTimeRef = useRef<number | null>(null);
+  const { theme, resolvedTheme } = useTheme();
 
   const effectiveColor = sparkColor || (resolvedTheme === "dark" ? "#fff" : "#000");
 
-  // Ensure component is mounted on client
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Handle canvas resize
-  useEffect(() => {
-    if (!mounted) return;
-
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const resizeCanvas = () => {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+    let resizeTimeout: NodeJS.Timeout;
 
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.scale(dpr, dpr);
+    const resizeCanvas = () => {
+      if (typeof window !== "undefined") {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       }
     };
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas);
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(resizeCanvas, 100);
+      }
     };
-  }, [mounted]);
+
+    if (typeof window !== "undefined") {
+      resizeCanvas();
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        clearTimeout(resizeTimeout);
+      };
+    }
+  }, []);
 
   const easeFunc = useCallback(
     (t: number) => {
@@ -87,18 +84,20 @@ export const ClickSpark = ({
     [easing]
   );
 
-  // Animation loop
   useEffect(() => {
-    if (!mounted) return;
-
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let animationId: number;
+
     const draw = (timestamp: number) => {
-      const dpr = window.devicePixelRatio || 1;
-      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      if (!startTimeRef.current) {
+        startTimeRef.current = timestamp;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       sparksRef.current = sparksRef.current.filter((spark) => {
         const elapsed = timestamp - spark.startTime;
@@ -119,7 +118,6 @@ export const ClickSpark = ({
 
         ctx.strokeStyle = effectiveColor;
         ctx.lineWidth = 2;
-        ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -128,59 +126,49 @@ export const ClickSpark = ({
         return true;
       });
 
-      animationIdRef.current = requestAnimationFrame(draw);
+      animationId = requestAnimationFrame(draw);
     };
 
-    animationIdRef.current = requestAnimationFrame(draw);
+    animationId = requestAnimationFrame(draw);
 
     return () => {
-      if (animationIdRef.current) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
+      cancelAnimationFrame(animationId);
     };
-  }, [mounted, effectiveColor, sparkSize, sparkRadius, duration, easeFunc, extraScale]);
+  }, [sparkColor, effectiveColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
 
-  // Handle click events
+  const handleClick = (e: MouseEvent) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    const now = performance.now();
+    const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
+      x,
+      y,
+      angle: (2 * Math.PI * i) / sparkCount,
+      startTime: now,
+    }));
+
+    sparksRef.current.push(...newSparks);
+  };
+
   useEffect(() => {
-    if (!mounted) return;
-
-    const handleClick = (e: MouseEvent) => {
-      // Use clientX/Y which are relative to the viewport
-      const x = e.clientX;
-      const y = e.clientY;
-      const now = performance.now();
-
-      const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
-        x,
-        y,
-        angle: (2 * Math.PI * i) / sparkCount,
-        startTime: now,
-      }));
-
-      sparksRef.current.push(...newSparks);
-    };
-
-    // Use capture phase to ensure we get clicks before they might be stopped
-    document.addEventListener("click", handleClick, true);
-
+    if (typeof window === "undefined") return;
+    document.addEventListener("click", handleClick);
     return () => {
-      document.removeEventListener("click", handleClick, true);
+      document.removeEventListener("click", handleClick);
     };
-  }, [mounted, sparkCount]);
-
-  if (!mounted) return null;
+  }, [sparkCount]);
 
   return (
     <canvas
       ref={canvasRef}
       style={{
+        width: "100%",
+        height: "100%",
         position: "fixed",
         top: 0,
         left: 0,
-        width: "100vw",
-        height: "100vh",
         pointerEvents: "none",
-        zIndex: 99999,
+        zIndex: 9999,
       }}
     />
   );
