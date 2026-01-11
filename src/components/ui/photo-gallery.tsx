@@ -97,7 +97,7 @@ const SelectedPhotoItem = memo(
           />
         </motion.div>
         {photos[selectedPhotoIndex].title && (
-          <div className="max-w-72 w-full text-center mt-2 font-medium text-xl flex items-center justify-center">
+          <div className="max-w-72 w-full text-center mt-2 font-medium text-xl flex items-center justify-center text-white">
             <motion.span
               initial={{ opacity: 0.1, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

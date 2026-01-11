@@ -13,15 +13,18 @@ An interactive photo gallery with rows of images that can be clicked to view in 
     <div className="relative w-full h-[400px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950">
       <PhotoGallery 
         photos={[
-          { url: 'https://i.pravatar.cc/200?img=1', title: 'Photo 1' },
-          { url: 'https://i.pravatar.cc/200?img=2', title: 'Photo 2' },
-          { url: 'https://i.pravatar.cc/200?img=3', title: 'Photo 3' },
-          { url: 'https://i.pravatar.cc/200?img=4', title: 'Photo 4' },
-          { url: 'https://i.pravatar.cc/200?img=5', title: 'Photo 5' },
-          { url: 'https://i.pravatar.cc/200?img=6', title: 'Photo 6' },
+          { url: '/avatars/powerpuff.png', title: 'Powerpuff Girls' },
+          { url: '/avatars/buggbunny.jpg', title: 'Bugs Bunny' },
+          { url: '/avatars/taz.jpg', title: 'Taz The Tazmanian Devil' },
+          { url: '/avatars/johnnybravo.jpg', title: 'Johnny Bravo' },
+          { url: '/avatars/courage.jpg', title: 'Courage The Cowardly Dog' },
+          { url: '/avatars/kick.jpg', title: 'Kick Buttowski' },
+          { url: '/avatars/phineas.jpg', title: 'Phineas' },
+          { url: '/avatars/platypus.jpg', title: 'Platypus Perry' },
+          { url: '/avatars/dexter.jpg', title: 'Dexter' },
         ]}
         rows={3}
-        title="Gallery"
+        title="POV: You had a great childhood"
         vignette={false}
       />
     </div>
@@ -30,16 +33,19 @@ An interactive photo gallery with rows of images that can be clicked to view in 
 
 export function Demo() {
   const photos = [
-    { url: 'https://i.pravatar.cc/200?img=1', title: 'Photo 1' },
-    { url: 'https://i.pravatar.cc/200?img=2', title: 'Photo 2' },
-    { url: 'https://i.pravatar.cc/200?img=3', title: 'Photo 3' },
+    { url: '/avatars/powerpuff.png', title: 'Powerpuff Girls' },
+    { url: '/avatars/buggbunny.jpg', title: 'Bugs Bunny' },
+    { url: '/avatars/taz.jpg', title: 'Taz The Tazmanian Devil' },
+    { url: '/avatars/johnnybravo.jpg', title: 'Johnny Bravo' },
+    { url: '/avatars/courage.jpg', title: 'Courage The Cowardly Dog' },
+    { url: '/avatars/kick.jpg', title: 'Kick Buttowski' },
   ]
 
   return (
     <PhotoGallery 
       photos={photos}
       rows={3}
-      title="My Gallery"
+      title="POV: You had a great childhood"
     />
   )
 }`}
