@@ -2,7 +2,7 @@ import { CodeBlock, Dependencies } from '@/components/docs/component-installatio
 import { CLICommand } from '@/components/docs/cli-command'
 import { PropsTable } from '@/components/docs/props-table'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import ExpandableBentoGrid from '@/components/ui/expandable-bento-grid'
+import { ExpandableBentoGridDemo } from '@/components/docs/expandable-bento-grid-demo'
 import { Zap, Star, Heart, Sparkles, Globe, Rocket } from 'lucide-react'
 
 export const demoItems = [
@@ -12,7 +12,7 @@ export const demoItems = [
     subtitle: "Optimized for speed",
     description: "Experience blazing fast performance with our optimized components.",
     content: <p>Our components are built with performance in mind, ensuring smooth animations and quick load times.</p>,
-    icon: <Zap className="w-6 h-6" />
+    icon: <Zap className="w-5 h-5" />
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ export const demoItems = [
     subtitle: "Modern aesthetics",
     description: "Stunning visuals that make your app stand out.",
     content: <p>Carefully crafted designs that follow modern UI/UX principles.</p>,
-    icon: <Star className="w-6 h-6" />
+    icon: <Star className="w-5 h-5" />
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ export const demoItems = [
     subtitle: "Quality first",
     description: "Every component is crafted with attention to detail.",
     content: <p>We put care and attention into every pixel.</p>,
-    icon: <Heart className="w-6 h-6" />
+    icon: <Heart className="w-5 h-5" />
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ export const demoItems = [
     subtitle: "Smooth & fluid",
     description: "Delightful micro-interactions that enhance UX.",
     content: <p>Powered by Framer Motion for butter-smooth animations.</p>,
-    icon: <Sparkles className="w-6 h-6" />
+    icon: <Sparkles className="w-5 h-5" />
   },
   {
     id: 5,
@@ -44,7 +44,7 @@ export const demoItems = [
     subtitle: "Works everywhere",
     description: "Responsive and accessible components.",
     content: <p>Works seamlessly across all devices and screen sizes.</p>,
-    icon: <Globe className="w-6 h-6" />
+    icon: <Globe className="w-5 h-5" />
   },
   {
     id: 6,
@@ -52,7 +52,7 @@ export const demoItems = [
     subtitle: "Production grade",
     description: "Battle-tested components for your projects.",
     content: <p>Ready to use in your production applications.</p>,
-    icon: <Rocket className="w-6 h-6" />
+    icon: <Rocket className="w-5 h-5" />
   }
 ]
 
@@ -62,8 +62,8 @@ An interactive bento-style grid with expandable cards that reveal details on cli
 
 <ComponentPreview
   component={
-    <div className="relative w-full h-[450px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 p-6">
-      <ExpandableBentoGrid items={demoItems} />
+    <div className="relative w-full h-[400px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 p-4">
+      <ExpandableBentoGridDemo items={demoItems} />
     </div>
   }
   code={`import ExpandableBentoGrid from '@/components/ui/expandable-bento-grid'
