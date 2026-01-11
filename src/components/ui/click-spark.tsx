@@ -44,8 +44,16 @@ export const ClickSpark = ({
 
     const resizeCanvas = () => {
       if (typeof window !== "undefined") {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.scale(dpr, dpr);
+        }
       }
     };
 
@@ -97,7 +105,8 @@ export const ClickSpark = ({
         startTimeRef.current = timestamp;
       }
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const dpr = window.devicePixelRatio || 1;
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
 
       sparksRef.current = sparksRef.current.filter((spark) => {
         const elapsed = timestamp - spark.startTime;
@@ -136,9 +145,7 @@ export const ClickSpark = ({
     };
   }, [sparkColor, effectiveColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
 
-  const handleClick = (e: MouseEvent) => {
-    const x = e.clientX;
-    const y = e.clientY;
+  const createSparks = useCallback((x: number, y: number) => {
     const now = performance.now();
     const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
       x,
@@ -148,15 +155,30 @@ export const ClickSpark = ({
     }));
 
     sparksRef.current.push(...newSparks);
-  };
+  }, [sparkCount]);
+
+  const handleClick = useCallback((e: MouseEvent) => {
+    createSparks(e.clientX, e.clientY);
+  }, [createSparks]);
+
+  const handleTouchStart = useCallback((e: TouchEvent) => {
+    // Handle all touch points for multi-touch support
+    Array.from(e.changedTouches).forEach((touch) => {
+      createSparks(touch.clientX, touch.clientY);
+    });
+  }, [createSparks]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    
     document.addEventListener("click", handleClick);
+    document.addEventListener("touchstart", handleTouchStart, { passive: true });
+    
     return () => {
       document.removeEventListener("click", handleClick);
+      document.removeEventListener("touchstart", handleTouchStart);
     };
-  }, [sparkCount]);
+  }, [handleClick, handleTouchStart]);
 
   return (
     <canvas
