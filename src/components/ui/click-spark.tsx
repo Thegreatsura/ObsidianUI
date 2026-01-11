@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useTheme } from "next-themes";
 
 interface Spark {
@@ -32,9 +32,15 @@ export const ClickSpark = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
   const startTimeRef = useRef<number | null>(null);
-  const { theme, resolvedTheme } = useTheme();
-  
-  const effectiveColor = sparkColor || (resolvedTheme === "dark" ? "#fff" : "#000");
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  // Ensure component is mounted before rendering to prevent hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const effectiveColor = sparkColor || (mounted && resolvedTheme === "dark" ? "#fff" : "#000");
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -157,6 +163,11 @@ export const ClickSpark = ({
       document.removeEventListener("click", handleClick);
     };
   }, [sparkCount]);
+
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <canvas
