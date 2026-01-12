@@ -179,38 +179,24 @@ export const HeroSection = () => {
                     { avatar: "https://api.dicebear.com/9.x/notionists/svg?seed=Liliana", name: "Liliana", delay: 0.15 },
                     { avatar: "https://api.dicebear.com/9.x/notionists/svg?seed=Brian", name: "Brian", delay: 0.3 },
                     { avatar: "https://api.dicebear.com/9.x/notionists/svg?seed=Robert", name: "Robert", delay: 0.45 },
-                  ].map((user, index) => (
+                  ].map((user) => (
                     <motion.div
                       key={user.name}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        duration: 0.8,
+                        duration: 0.6,
                         delay: user.delay,
-                        ease: [0.16, 1, 0.3, 1],
+                        ease: "easeOut",
                       }}
                       className="relative group cursor-pointer"
+                      style={{ willChange: "transform" }}
                     >
-                      <motion.img
+                      <img
                         src={user.avatar}
                         alt={user.name}
-                        className="w-10 h-10 rounded-full border-2 border-white bg-white shadow-sm transition-all duration-300 group-hover:shadow-lg"
-                        whileHover={{
-                          y: -8,
-                          scale: 1.1,
-                          zIndex: 10,
-                          transition: { duration: 0.3, ease: [0.23, 1, 0.32, 1] }
-                        }}
-                        animate={{
-                          y: [0, -2, 0],
-                        }}
-                        transition={{
-                          duration: 3,
-                          delay: user.delay + 0.8,
-                          repeat: Infinity,
-                          repeatDelay: 0.5,
-                          ease: [0.45, 0, 0.55, 1],
-                        }}
+                        className="w-10 h-10 rounded-full border-2 border-white bg-white shadow-sm transform transition-transform duration-200 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:shadow-lg"
+                        style={{ willChange: "transform" }}
                       />
                     </motion.div>
                   ))}
