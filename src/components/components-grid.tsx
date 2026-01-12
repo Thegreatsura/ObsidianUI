@@ -73,7 +73,7 @@ const VideoPreview = ({ src, poster }: { src: string; poster?: string }) => {
             {!isLoaded && (
                 <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
             )}
-            
+
             <video
                 ref={videoRef}
                 className="absolute inset-0 w-full h-full object-cover"

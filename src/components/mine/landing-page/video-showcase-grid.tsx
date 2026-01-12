@@ -19,10 +19,8 @@ const videoDemos: VideoDemo[] = [
     { id: 'circle-menu', name: 'Circle Menu', videoPath: '/demos/circle-menu.mp4', docPath: '/docs/circle-menu' },
     { id: 'eagle-vision', name: 'Eagle Vision', videoPath: '/demos/eagle-vision.mp4', docPath: '/docs/eagle-vision' },
     { id: 'flip-scroll', name: 'Flip Scroll', videoPath: '/demos/flip-scroll.mp4', docPath: '/docs/flip-scroll' },
-    { id: 'image-pile', name: 'Image Pile', videoPath: '/demos/image-pile.mp4', docPath: '/docs/image-pile' },
     { id: 'leave-rating', name: 'Leave Rating', videoPath: '/demos/leave-rating.mp4', docPath: '/docs/leave-rating' },
     { id: 'photo-gallery', name: 'Photo Gallery', videoPath: '/demos/photo-gallery.mp4', docPath: '/docs/photo-gallery' },
-    { id: 'trading-cards', name: 'Trading Cards', videoPath: '/demos/trading-cards.mp4', docPath: '/docs/trading-card' },
 ]
 
 export function VideoShowcaseGrid() {
@@ -76,7 +74,7 @@ export function VideoShowcaseGrid() {
                 {/* Video Grid */}
                 <div
                     ref={gridRef}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
                     {videoDemos.map((demo) => (
                         <Link
