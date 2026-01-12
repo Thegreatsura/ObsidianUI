@@ -68,19 +68,51 @@ body,
 
 html {
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* GPU Acceleration for smooth animations */
-/* body {
+/* Smooth body transitions */
+body {
+  transition: background-color 0.3s ease;
+}
+
+/* GPU Acceleration for smooth animations and scrolling */
+.gpu-accelerated,
+section,
+header,
+footer,
+main,
+nav {
   transform: translateZ(0);
   backface-visibility: hidden;
-  perspective: 1000px;
-} */
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize images and media for smooth loading */
+img,
+video,
+canvas,
+svg {
+  will-change: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Smooth transitions for interactive elements */
+a,
+button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 /* Optimize rendering for animations */
 @media (prefers-reduced-motion: no-preference) {
   * {
     scroll-behavior: smooth;
+  }
+  
+  /* Enable smooth scrolling with momentum on iOS */
+  body {
+    -webkit-overflow-scrolling: touch;
   }
 }
 

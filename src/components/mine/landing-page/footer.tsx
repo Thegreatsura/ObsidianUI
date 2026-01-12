@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Github, Twitter } from "lucide-react";
+import { VisitorCount } from "@/components/ui/visitor-count";
 
 const Footer = () => {
   return (
@@ -112,8 +113,13 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Visitor Counter */}
+        <div className="mt-8 flex justify-center">
+          <VisitorCount />
+        </div>
+
         {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-neutral-500 dark:text-neutral-500">
             © {new Date().getFullYear()} ObsidianUI. All rights reserved.
           </p>
