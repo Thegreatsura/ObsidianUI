@@ -2,10 +2,7 @@
 
 import React, { useMemo } from "react";
 import { useRouter } from "next/router";
-import { SpotlightNavbar } from "@/components/ui/spotlight-navbar";
-import { CommandMenu } from "@/components/command-menu";
-import { ModeToggle } from "@/components/mode-toggle";
-import { GitHubStarCounter } from "@/components/github-star-counter";
+import { NavbarContent } from "@/components/navbar-content";
 
 const navItems = [
     { label: "Home", href: "/" },
@@ -27,30 +24,7 @@ export function CustomNavbar() {
         return 0;
     }, [currentPath]);
 
-    return (
-        <div className="w-full sticky top-0 z-50">
-            {/* Centered SpotlightNavbar - matching landing page style */}
-            <div className="flex justify-center pt-4">
-                <SpotlightNavbar
-                    items={navItems}
-                    defaultActiveIndex={activeIndex}
-                    className="!pt-0"
-                    logo={
-                        <a href="/" className="flex items-center">
-                            <img src="/logo/bg-less.png" alt="ObsidianUI" className="h-7 w-7 object-contain" />
-                        </a>
-                    }
-                />
-            </div>
-
-            {/* Search, GitHub Stars & Theme Toggle - fixed top right */}
-            <div className="fixed top-4 right-4 flex items-center gap-2 z-50">
-                <GitHubStarCounter />
-                <CommandMenu />
-                <ModeToggle />
-            </div>
-        </div>
-    );
+    return <NavbarContent activeIndex={activeIndex} />;
 }
 
 export default CustomNavbar;

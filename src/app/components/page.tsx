@@ -1,42 +1,13 @@
 "use client";
 
 import React from "react";
-import { SpotlightNavbar } from "@/components/ui/spotlight-navbar";
+import { NavbarContent } from "@/components/navbar-content";
 import { ComponentsGrid } from "@/components/components-grid";
-import { CommandMenu } from "@/components/command-menu";
-import { ModeToggle } from "@/components/mode-toggle";
-
-const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Components", href: "/components" },
-    { label: "Docs", href: "/docs/installation" },
-    { label: "Templates", href: "/templates" },
-];
 
 export default function ComponentsPage() {
     return (
         <div className="min-h-screen bg-white dark:bg-black">
-            {/* Header */}
-            <div className="sticky top-0 z-50">
-                <div className="flex justify-center pt-4">
-                    <SpotlightNavbar
-                        items={navItems}
-                        defaultActiveIndex={1}
-                        className="!pt-0"
-                        logo={
-                            <a href="/" className="flex items-center">
-                                <img src="/logo/bg-less.png" alt="ObsidianUI" className="h-7 w-7 object-contain" />
-                            </a>
-                        }
-                    />
-                </div>
-
-                {/* Search & Theme Toggle - fixed top right */}
-                <div className="fixed top-4 right-4 flex items-center gap-2 z-50">
-                    <CommandMenu />
-                    <ModeToggle />
-                </div>
-            </div>
+            <NavbarContent activeIndex={1} />
 
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 py-12">
