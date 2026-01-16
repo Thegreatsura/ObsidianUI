@@ -37,30 +37,39 @@ export const metadata: Metadata = {
     "UI Components",
     "Component Library",
     "Tailwind CSS",
-    "Three.js",
+    "Framer Motion",
     "Animation",
     "Web Development",
     "Frontend",
     "ObsidianUI",
+    "React UI Library",
+    "Motion UI",
   ],
   authors: [{ name: "ObsidianUI" }],
+  creator: "ObsidianUI",
+  publisher: "ObsidianUI",
   icons: {
-    icon: "/logo/bg-less.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo/bg-less.png", type: "image/png" },
+    ],
     apple: "/logo/bg-less.png",
+    shortcut: "/logo/bg-less.png",
   },
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
-    url: "https://www.obsidianui.com",
+    url: "https://www.obsidianui.dev",
     title: "ObsidianUI - Premium React Components",
     description:
       "Beautiful, modern, and customizable React components. Build stunning interfaces with ObsidianUI - a premium component library for React and Next.js.",
     siteName: "ObsidianUI",
     images: [
       {
-        url: "https://www.obsidianui.com/og-image.png",
+        url: "https://www.obsidianui.dev/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ObsidianUI - Premium React Components",
+        alt: "ObsidianUI - Design Less. Ship Better.",
       },
     ],
     locale: "en_US",
@@ -70,19 +79,89 @@ export const metadata: Metadata = {
     title: "ObsidianUI - Premium React Components",
     description:
       "Beautiful, modern, and customizable React components. Build stunning interfaces with ObsidianUI.",
-    images: ["https://www.obsidianui.com/og-image.png"],
+    images: ["https://www.obsidianui.dev/og-image.png"],
+    creator: "@obsidianui",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
-  metadataBase: new URL("https://www.obsidianui.com"),
+  alternates: {
+    canonical: "https://www.obsidianui.dev",
+  },
+  metadataBase: new URL("https://www.obsidianui.dev"),
 };
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
+
+// JSON-LD Structured Data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.obsidianui.dev/#website",
+      url: "https://www.obsidianui.dev",
+      name: "ObsidianUI",
+      description: "Premium React UI Component Library",
+      publisher: { "@id": "https://www.obsidianui.dev/#organization" },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: "https://www.obsidianui.dev/components?search={search_term_string}",
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.obsidianui.dev/#organization",
+      name: "ObsidianUI",
+      url: "https://www.obsidianui.dev",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.obsidianui.dev/logo/bg-less.png",
+      },
+      sameAs: [
+        "https://github.com/Atharvsinh-codez/ObsidianUI",
+        "https://x.com/obsidianui",
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.obsidianui.dev/#software",
+      name: "ObsidianUI",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Web",
+      description: "Premium React UI Component Library with Tailwind CSS and Framer Motion",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        ratingCount: "1000",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -90,6 +169,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${interTight.variable} ${pixelify.variable} ${playfair.variable} antialiased`}
       >

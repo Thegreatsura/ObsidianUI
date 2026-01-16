@@ -262,15 +262,15 @@ export const HeroSection = () => {
         </div>
 
         {/* Large Background Text */}
-        <div className="w-full h-[3vh] absolute md:bottom-12 bottom-2 sm:bottom-4 flex items-center justify-center pointer-events-none">
+        <div className="w-full h-[3vh] absolute md:bottom-12 bottom-2 sm:bottom-4 flex items-center justify-center pointer-events-none" aria-hidden="true">
           {/* Mobile version - smaller and hidden overflow */}
-          <h1 className="md:hidden text-[60px] sm:text-[100px] z-5 tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/40 via-zinc-300/30 to-transparent select-none whitespace-nowrap">
+          <span className="md:hidden text-[60px] sm:text-[100px] z-5 tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/40 via-zinc-300/30 to-transparent select-none whitespace-nowrap">
             ObsidianUI
-          </h1>
+          </span>
           {/* Desktop version - original styling */}
-          <h1 className="hidden md:block text-[230px] lg:text-[300px] z-5 tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/40 via-zinc-300/30 to-transparent select-none">
+          <span className="hidden md:block text-[230px] lg:text-[300px] z-5 tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/40 via-zinc-300/30 to-transparent select-none">
             ObsidianUI
-          </h1>
+          </span>
         </div>
       </div>
     </div>

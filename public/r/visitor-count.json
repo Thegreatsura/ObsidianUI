@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "visitor-count",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/visitor-count.tsx",
+      "content": "'use client'\r\n\r\nimport { useEffect, useState } from 'react'\r\nimport { getOrCreateVisitorId } from '@/lib/fingerprint'\r\nimport { Eye } from 'lucide-react'\r\n\r\ninterface VisitorStats {\r\n    uniqueVisitors: number\r\n}\r\n\r\nexport function VisitorCount({ className }: { className?: string }) {\r\n    const [stats, setStats] = useState<VisitorStats | null>(null)\r\n    const [loading, setLoading] = useState(true)\r\n\r\n    useEffect(() => {\r\n        async function trackAndFetchStats() {\r\n            try {\r\n                const fingerprint = getOrCreateVisitorId()\r\n\r\n                await fetch('/api/visitors', {\r\n                    method: 'POST',\r\n                    headers: {\r\n                        'Content-Type': 'application/json',\r\n                    },\r\n                    body: JSON.stringify({ fingerprint }),\r\n                    cache: 'no-store'\r\n                })\r\n\r\n                const response = await fetch('/api/visitors', {\r\n                    method: 'GET',\r\n                    cache: 'no-store'\r\n                })\r\n\r\n                if (response.ok) {\r\n                    const data = await response.json()\r\n                    setStats({\r\n                        uniqueVisitors: data.uniqueVisitors || 0\r\n                    })\r\n                }\r\n            } catch (error) {\r\n                console.error('Failed to fetch visitor stats:', error)\r\n            } finally {\r\n                setLoading(false)\r\n            }\r\n        }\r\n\r\n        trackAndFetchStats()\r\n    }, [])\r\n\r\n    if (loading) {\r\n        return (\r\n            <div className=\"inline-flex items-center gap-2 bg-neutral-100 dark:bg-neutral-800 rounded-full px-4 py-2\">\r\n                <div className=\"w-5 h-5 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse\" />\r\n                <div className=\"w-32 h-4 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse\" />\r\n            </div>\r\n        )\r\n    }\r\n\r\n    if (!stats) {\r\n        return null\r\n    }\r\n\r\n    return (\r\n        <div className={`inline-flex items-center gap-2.5 bg-neutral-100 dark:bg-neutral-800 rounded-full px-4 py-2.5 ${className || ''}`}>\r\n            <div className=\"w-6 h-6 bg-neutral-200 dark:bg-neutral-700 rounded flex items-center justify-center\">\r\n                <Eye className=\"w-4 h-4 text-neutral-600 dark:text-neutral-400\" />\r\n            </div>\r\n            <span className=\"text-sm text-neutral-600 dark:text-neutral-400\">\r\n                You are the <span className=\"font-semibold text-black dark:text-white\">{stats.uniqueVisitors.toLocaleString()}<sup className=\"text-[10px]\">th</sup></span> visitor\r\n            </span>\r\n        </div>\r\n    )\r\n}\r\n",
+      "type": "registry:ui",
+      "target": "components/ui/visitor-count.tsx"
+    }
+  ]
+}

@@ -1060,5 +1060,15 @@
     "files": [
       "public/r/trading-card.json"
     ]
+  },
+  {
+    "name": "visitor-count",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "type": "registry:ui",
+    "files": [
+      "public/r/visitor-count.json"
+    ]
   }
 ]
