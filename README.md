@@ -1,7 +1,5 @@
 # ObsidianUI
 
-![ObsidianUI Banner](public/logo/bg-less.png)
-
 **ObsidianUI** is a premium React component library designed to help developers ship beautiful, animation-rich interfaces faster. Built on top of **Next.js**, **Tailwind CSS**, and **Framer Motion**, it provides a collection of copy-paste components that are accessible, customizable, and production-ready.
 
 ## 🚀 Key Features
