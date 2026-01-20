@@ -10,21 +10,22 @@ import { GithubButton } from "@/components/github-button";
 
 export const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // Removed state to prevent re-renders on every mouse move
   const lastUpdateRef = useRef<number>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Throttled mouse move handler for better performance
+  // Direct DOM update for best performance without re-renders
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const now = Date.now();
-    if (now - lastUpdateRef.current < 32) return; // Throttle to ~30fps
-    lastUpdateRef.current = now;
-
     if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+
+    // Throttle via requestAnimationFrame for smoother 60fps tracking
+    requestAnimationFrame(() => {
+      const rect = containerRef.current!.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      containerRef.current!.style.setProperty('--mouse-x', `${x}px`);
+      containerRef.current!.style.setProperty('--mouse-y', `${y}px`);
     });
   }, []);
 
@@ -43,10 +44,10 @@ export const HeroSection = () => {
         className="relative h-[calc(100vh-1rem)] md:h-[calc(100vh-2rem)] min-h-[550px] md:min-h-[600px] max-h-[900px] w-[96%] md:w-[98%] max-w-[1600px] flex flex-col items-center justify-center overflow-hidden rounded-[24px] md:rounded-[40px] transition-all duration-500 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         style={{
           background: `
-            radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 0, 0, 0.02), transparent 40%),
+            radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 0, 0, 0.02), transparent 40%),
             linear-gradient(to bottom, #ffffff 0%, #f9fafb 50%, #f6f7f9 100%)
           `,
-        }}
+        } as React.CSSProperties}
       >
         {/* Vertical Lines Pattern */}
         <div
