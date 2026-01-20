@@ -84,7 +84,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 🌟 Support
 
-If you like this project, please give it a ⭐️ on [GitHub](https://github.com/Atharvsinh-codez/ObsidianUI)!
+If you like this project, give it a ⭐️ on [GitHub](https://github.com/Atharvsinh-codez/ObsidianUI)!
 
 ---
 
