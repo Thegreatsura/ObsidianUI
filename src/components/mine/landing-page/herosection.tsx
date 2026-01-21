@@ -7,12 +7,15 @@ import { MaskedAvatars } from "@/components/ui/masked-avatars";
 import GlassSearchBar from "@/components/mine/landing-page/glass-search-bar";
 import { SpotlightNavbar } from "@/components/ui/spotlight-navbar";
 import { GithubButton } from "@/components/github-button";
+import { useVisitorCount } from "@/hooks/use-visitor-count";
 
 export const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   // Removed state to prevent re-renders on every mouse move
   const lastUpdateRef = useRef<number>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { count, loading } = useVisitorCount();
 
   // Direct DOM update for best performance without re-renders
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -209,7 +212,13 @@ export const HeroSection = () => {
                   className="flex flex-col"
                 >
                   <div className="flex items-center gap-1">
-                    <span className="text-sm font-semibold text-zinc-900">1000+</span>
+                    <span className="text-sm font-semibold text-zinc-900">
+                      {loading ? (
+                        <span className="inline-block w-8 h-4 bg-zinc-200 animate-pulse rounded"></span>
+                      ) : (
+                        <span>{count > 0 ? count.toLocaleString() + "+" : "1000+"}</span>
+                      )}
+                    </span>
                     <span className="text-sm text-zinc-600">developers</span>
                   </div>
                   <span className="text-xs text-zinc-500 font-medium">trust ObsidianUI</span>
