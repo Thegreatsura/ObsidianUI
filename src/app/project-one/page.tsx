@@ -7,7 +7,7 @@ import { NavbarContent } from "@/components/navbar-content";
 
 const project = {
     title: "Project One",
-    videoUrl: "https://pub-affb2190b74549c4a9fde667b3cb7485.r2.dev/templates/project-one.mp4",
+    videoUrl: "https://cdn.obsidianui.dev/templates/project-one.mp4",
     previewUrl: "https://project-one.obsidianui.dev/",
     githubUrl: "https://github.com/Atharvsinh-codez/Project-1",
     tags: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Next.js"],

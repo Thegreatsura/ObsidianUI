@@ -11,7 +11,7 @@ const templates = [
         title: "Project One",
         tags: ["Landing", "Fintech", "Web3"],
         href: "/project-one",
-        videoUrl: "https://pub-affb2190b74549c4a9fde667b3cb7485.r2.dev/templates/project-one.mp4",
+        videoUrl: "https://cdn.obsidianui.dev/templates/project-one.mp4",
         poster: "https://image.mux.com/douTLfhlOThh95tbZdrKwYDGynkP2LG9lKiUbJ00X77Q/thumbnail.png?time=1",
     },
 ];
