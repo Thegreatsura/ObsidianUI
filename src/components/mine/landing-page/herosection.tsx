@@ -136,7 +136,7 @@ export const HeroSection = () => {
                 ))}
                 <div className="border-t border-zinc-200 mt-2 pt-3">
                   <a
-                    href="https://github.com/obsidianui"
+                    href="https://github.com/Atharvsinh-codez/ObsidianUI"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition-colors font-medium"
