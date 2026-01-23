@@ -7,13 +7,25 @@ import { NavbarContent } from "@/components/navbar-content";
 
 const project = {
     title: "Project One",
-    videoUrl: "/videos/project-one.mp4",
+    videoUrl: "https://pub-affb2190b74549c4a9fde667b3cb7485.r2.dev/templates/project-one.mp4",
     previewUrl: "https://project-one.obsidianui.dev/",
     githubUrl: "https://github.com/Atharvsinh-codez/Project-1",
     tags: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Next.js"],
 };
 
+import { useRef, useEffect } from "react";
+
 export default function ProjectOnePage() {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(error => {
+                console.log("Video autoplay failed:", error);
+            });
+        }
+    }, []);
+
     return (
         <div className="min-h-screen bg-[#fafafa] dark:bg-black">
             <NavbarContent activeIndex={3} />
@@ -68,6 +80,7 @@ export default function ProjectOnePage() {
                     {/* Video Preview */}
                     <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] bg-zinc-100 dark:bg-zinc-900 mb-12 border border-zinc-200 dark:border-zinc-800">
                         <video
+                            ref={videoRef}
                             src={project.videoUrl}
                             className="w-full aspect-video object-cover"
                             autoPlay
